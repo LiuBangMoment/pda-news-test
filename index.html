@@ -84,10 +84,10 @@
     display: flex;
     align-items: center;
     height: 100%;
-    width: max-content; /* FIXED: Forces container to measure actual text width */
-    animation: scroll-left 56s linear infinite; /* Adjusted for extra copies */
+    width: max-content;
+    animation: scroll-left 56s linear infinite;
     white-space: nowrap;
-    will-change: transform; /* Smooths out the animation performance */
+    will-change: transform;
   }
 
   .aqi-item {
@@ -107,7 +107,7 @@
 
   @keyframes scroll-left {
     0%   { transform: translateX(0); }
-    100% { transform: translateX(-50%); } /* Scrolls exactly halfway through the 4 copies */
+    100% { transform: translateX(-50%); }
   }
 
   /* ── MASTHEAD (Full Bleed Background) ───────────── */
@@ -1023,7 +1023,7 @@
       <div class="list-content">
         <div class="list-cat">Economy</div>
         <div class="list-hl">New Makoko apartment rents hit record high for third straight quarter</div>
-        <div class="list-meta">Adaeze Okonkwo · 1 hr ago</div>
+        <div class="list-meta">1 hr ago</div>
       </div>
     </a>
     <a href="cassava-blight.html" class="list-article article-link">
@@ -1031,7 +1031,7 @@
       <div class="list-content">
         <div class="list-cat">Tech</div>
         <div class="list-hl">Researchers at University of Nigeria announce breakthrough in cassava blight resistance</div>
-        <div class="list-meta">Emeka Nwosu · 2 hrs ago</div>
+        <div class="list-meta">2 hrs ago</div>
       </div>
     </a>
   </div>
@@ -1112,7 +1112,6 @@ const aqiData = [
 const scroll = document.getElementById('aqiScroll');
 const buildTicker = () => {
   let html = '';
-  // Increased duplicate sets from 2 to 4 to prevent empty space before the CSS animation loops on large screens
   for (let i = 0; i < 4; i++) {
     aqiData.forEach(d => {
       html += `<span class="aqi-item">
