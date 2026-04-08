@@ -5,8 +5,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>Forward! — The Voice of the People</title>
-<link rel="preconnect" href="https://fonts.googleapis.com/">
-<link href="Forward!%20%E2%80%94%20The%20Voice%20of%20the%20People_files/css2.css" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+
 <style>
   :root {
     --blue: #1a4d8f;
@@ -16,8 +19,8 @@
     --bg-panel: #0e1117; 
     --bg-card: #0e1117;  
     --ink: #dde4ed;
-    --mid: #7a8fa3;
-    --muted: #3d5068;
+    --mid: #9baec2;    /* Brightened from #7a8fa3 */
+    --muted: #7890a8;  /* Brightened from #3d5068 */
     --line: rgba(255,255,255,0.06);
     --line-strong: rgba(255,255,255,0.1);
   }
@@ -112,7 +115,7 @@
   }
   
   .masthead-inner {
-    padding: 20px 16px 16px; /* Cleaned up outer padding */
+    padding: 20px 16px 16px; 
   }
 
   .masthead-top {
@@ -120,7 +123,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 20px; /* Strict spacing above the logo */
+    margin-bottom: 20px; 
   }
 
   .date-line {
@@ -129,13 +132,13 @@
     color: var(--mid);
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    line-height: 1; /* Eliminates invisible font height pushing the logo down */
+    line-height: 1; 
   }
 
   .edition-pill {
     position: absolute; 
     right: 0;
-    top: 50%; /* Locks the pill perfectly to the center of the date text */
+    top: 50%; 
     transform: translateY(-50%);
     background: transparent;
     color: var(--accent);
@@ -148,13 +151,13 @@
     border-radius: 2px;
   }
 
-  /* Masthead Logo (FORWARD_BOLD.png) */
+  /* Masthead Logo */
   .wordmark {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0; /* Removed padding */
-    margin-bottom: 28px; /* Adjusted to match your 20px manual setting */
+    padding: 0; 
+    margin-bottom: 28px; /* Restored to 28px */
   }
 
   .wordmark img {
@@ -207,7 +210,6 @@
     text-decoration: none;
   }
 
-  /* Adds a left border specifically to the very first nav item */
   .nav-item:first-child {
     border-left: 1px solid var(--line);
   }
@@ -786,7 +788,7 @@
   /* ── DESKTOP RESPONSIVENESS ──────────────────────── */
   @media (min-width: 768px) {
     .masthead-inner {
-      padding: 24px 32px 16px; /* Restored general padding for desktop */
+      padding: 24px 32px 16px; 
     }
     
     .nav-inner {
@@ -868,17 +870,17 @@
 <nav class="nav-strip">
   <div class="container nav-inner">
     <a href="index.html" class="nav-item active">Today</a>
-    <a href="https://example.com/politics" class="nav-item">Politics</a>
-    <a href="https://example.com/economy" class="nav-item">Economy</a>
-    <a href="https://example.com/lagos" class="nav-item">Lagos</a>
-    <a href="https://example.com/world" class="nav-item">World</a>
-    <a href="https://example.com/tech" class="nav-item">Tech</a>
-    <a href="https://example.com/culture" class="nav-item">Culture</a>
-    <a href="https://example.com/sport" class="nav-item">Sport</a>
+    <a href="politics.html" class="nav-item">Politics</a>
+    <a href="economy.html" class="nav-item">Economy</a>
+    <a href="lagos.html" class="nav-item">Lagos</a>
+    <a href="world.html" class="nav-item">World</a>
+    <a href="tech.html" class="nav-item">Tech</a>
+    <a href="culture.html" class="nav-item">Culture</a>
+    <a href="sport.html" class="nav-item">Sport</a>
   </div>
 </nav>
 
-<a href="https://example.com/breaking-news-al-shahid" class="breaking article-link">
+<a href="breaking-news-al-shahid.html" class="breaking article-link">
   <div class="container breaking-inner">
     <span class="breaking-tag">BREAKING</span>
     <span class="breaking-text">Al-Shahid Attack On Police Station Kills Three · Live Updates</span>
@@ -887,7 +889,7 @@
 
 <main class="container site-main">
   
-  <a href="https://example.com/eagle-automotive" class="headliner article-link">
+  <a href="eagle-automotive.html" class="headliner article-link">
     <div class="headliner-img-placeholder">
       <img src="assets/img/eagle-car.webp" alt="Ogun electric sedan">
       <span class="headliner-label">Cover Story</span>
@@ -919,7 +921,7 @@
   </div>
 
   <div class="card-grid">
-    <a href="https://example.com/makoko-museum" class="card article-link">
+    <a href="makoko-museum.html" class="card article-link">
       <div class="card-thumb">
         <img src="assets/img/makoko-museum.webp" alt="City Museum">
         <span class="card-cat">Culture</span>
@@ -928,7 +930,7 @@
       <span class="card-time">2 hrs ago</span>
     </a>
 
-    <a href="https://example.com/water-tests" class="card article-link">
+    <a href="water-tests.html" class="card article-link">
       <div class="card-thumb">
         <img src="assets/img/water-tests.webp" alt="Water Tests">
         <span class="card-cat">Tech</span>
@@ -937,7 +939,7 @@
       <span class="card-time">5 hrs ago</span>
     </a>
 
-    <a href="https://example.com/rail-expansion" class="card article-link">
+    <a href="rail-expansion.html" class="card article-link">
       <div class="card-thumb">
         <img src="assets/img/rail-expansion.webp" alt="Rail Expansion">
         <span class="card-cat">Economy</span>
@@ -946,7 +948,7 @@
       <span class="card-time">8 hrs ago</span>
     </a>
 
-    <a href="https://example.com/pallas-cat" class="card article-link">
+    <a href="pallas-cat.html" class="card article-link">
       <div class="card-thumb">
         <img src="assets/img/pallas-cat.webp" alt="Zoo Pallas Cat">
         <span class="card-cat">Culture</span>
@@ -956,7 +958,7 @@
     </a>
   </div>
 
-  <a href="https://example.com/editorial-socialism" class="opinion-strip article-link">
+  <a href="editorial-socialism.html" class="opinion-strip article-link">
     <div class="opinion-bg-text">OPINION</div>
     <div class="opinion-tag">◈ Editorial</div>
     <blockquote class="opinion-quote">"Socialism Isn't a Dirty Word Anymore"</blockquote>
@@ -978,7 +980,7 @@
   </div>
 
   <div id="latestList">
-    <a href="https://example.com/makoko-rents" class="list-article article-link">
+    <a href="makoko-rents.html" class="list-article article-link">
       <span class="list-num">1</span>
       <div class="list-content">
         <div class="list-cat">Economy</div>
@@ -986,7 +988,7 @@
         <div class="list-meta">Adaeze Okonkwo · 1 hr ago</div>
       </div>
     </a>
-    <a href="https://example.com/cassava-blight" class="list-article article-link">
+    <a href="cassava-blight.html" class="list-article article-link">
       <span class="list-num">2</span>
       <div class="list-content">
         <div class="list-cat">Tech</div>
@@ -994,7 +996,7 @@
         <div class="list-meta">Emeka Nwosu · 2 hrs ago</div>
       </div>
     </a>
-    <a href="https://example.com/youth-politics" class="list-article article-link">
+    <a href="youth-politics.html" class="list-article article-link">
       <span class="list-num">3</span>
       <div class="list-content">
         <div class="list-cat">Politics</div>
@@ -1002,7 +1004,7 @@
         <div class="list-meta">Fatima Bello · 4 hrs ago</div>
       </div>
     </a>
-    <a href="https://example.com/pda-housing" class="list-article article-link">
+    <a href="pda-housing.html" class="list-article article-link">
       <span class="list-num">4</span>
       <div class="list-content">
         <div class="list-cat">Economy</div>
@@ -1010,7 +1012,7 @@
         <div class="list-meta">Chidi Okeke · 5 hrs ago</div>
       </div>
     </a>
-    <a href="https://example.com/national-unity" class="list-article article-link">
+    <a href="national-unity.html" class="list-article article-link">
       <span class="list-num">5</span>
       <div class="list-content">
         <div class="list-cat">Politics</div>
@@ -1048,24 +1050,24 @@
     <div class="footer-divider"></div>
 
     <div class="footer-links-primary">
-      <a href="https://example.com/about">About us</a>
-      <a href="https://example.com/staff">Our staff</a>
-      <a href="https://example.com/ethics">Ethics & Guidelines</a>
-      <a href="https://example.com/contact">Contact us</a>
-      <a href="https://example.com/pitch">How to pitch Forward!</a>
-      <a href="https://example.com/newsletters">Newsletters</a>
-      <a href="https://example.com/archives">Archives</a>
+      <a href="about.html">About us</a>
+      <a href="staff.html">Our staff</a>
+      <a href="ethics.html">Ethics & Guidelines</a>
+      <a href="contact.html">Contact us</a>
+      <a href="pitch.html">How to pitch Forward!</a>
+      <a href="newsletters.html">Newsletters</a>
+      <a href="archives.html">Archives</a>
     </div>
 
     <div class="footer-links-secondary">
-      <a href="https://example.com/privacy">Privacy Notice</a>
-      <a href="https://example.com/terms">Terms of Use</a>
-      <a href="https://example.com/cookies">Cookie Policy</a>
-      <a href="https://example.com/do-not-sell">Do Not Sell or Share My Personal Data</a>
-      <a href="https://example.com/licensing">Licensing</a>
-      <a href="https://example.com/accessibility">Accessibility</a>
-      <a href="https://example.com/status">Platform Status</a>
-      <a href="https://example.com/careers">Careers</a>
+      <a href="privacy.html">Privacy Notice</a>
+      <a href="terms.html">Terms of Use</a>
+      <a href="cookies.html">Cookie Policy</a>
+      <a href="do-not-sell.html">Do Not Sell or Share My Personal Data</a>
+      <a href="licensing.html">Licensing</a>
+      <a href="accessibility.html">Accessibility</a>
+      <a href="status.html">Platform Status</a>
+      <a href="careers.html">Careers</a>
     </div>
 
     <div class="footer-copyright">
