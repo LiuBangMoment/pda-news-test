@@ -4,11 +4,11 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Forward! — The Voice of the People</title>
+<title>[ARTICLE HEADLINE] — Forward!</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Space+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
   :root {
@@ -35,20 +35,18 @@
     overflow-x: hidden;
   }
 
-  /* Global Link Reset for Article Cards */
   .article-link {
     text-decoration: none;
     color: inherit;
   }
 
-  /* Global Content Aligner */
   .container {
     max-width: 1200px;
     margin: 0 auto;
     width: 100%;
   }
 
-  /* ── AQI TICKER (Full Bleed) ────────────────────── */
+  /* ── AQI TICKER ─────────────────────────────────── */
   .aqi-bar {
     background: var(--bg-panel);
     color: #fff;
@@ -110,7 +108,7 @@
     100% { transform: translateX(-50%); }
   }
 
-  /* ── MASTHEAD (Full Bleed Background) ───────────── */
+  /* ── MASTHEAD ───────────────────────────────────── */
   .masthead {
     background: var(--bg-panel);
     border-bottom: 1px solid var(--line-strong);
@@ -153,7 +151,6 @@
     border-radius: 2px;
   }
 
-  /* Masthead Logo */
   .wordmark {
     display: flex;
     align-items: center;
@@ -185,7 +182,7 @@
     margin-top: 0;
   }
 
-  /* ── NAV (Full Bleed Background) ────────────────── */
+  /* ── NAV ────────────────────────────────────────── */
   .nav-strip {
     background: var(--bg);
     overflow-x: auto;
@@ -224,7 +221,7 @@
   .nav-item.active { color: var(--ink); border-bottom: 2px solid var(--red); padding-bottom: 8px; }
   .nav-item:hover { color: var(--mid); }
 
-  /* ── BREAKING (Full Bleed Background) ───────────── */
+  /* ── BREAKING ───────────────────────────────────── */
   .breaking {
     background: var(--bg-card);
     border-bottom: 1px solid var(--line-strong);
@@ -276,402 +273,263 @@
     transition: text-decoration 0.15s;
   }
 
-  /* ── HEADLINER ───────────────────────────────────── */
-  .headliner {
-    border-bottom: 1px solid var(--line-strong);
-    background: var(--bg-panel);
-    display: flex;
-    flex-direction: column;
-    transition: background 0.15s;
-  }
-
-  .headliner:hover {
-    background: #13181f;
-  }
-
-  .headliner:hover .headliner-headline {
-    text-decoration: underline;
-    text-decoration-color: var(--accent);
-    text-decoration-thickness: 2px;
-    text-underline-offset: 4px;
-  }
-
-  .headliner-img-placeholder {
-    width: 100%;
-    aspect-ratio: 16/9;
-    position: relative;
-    overflow: hidden;
-    background: var(--bg-card);
-  }
-
-  .headliner-img-placeholder img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-
-  .headliner-label {
-    position: absolute;
-    top: 14px; left: 14px;
-    z-index: 10;
-    background: var(--red);
-    color: #fff;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 8px;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    padding: 4px 8px;
-    text-transform: uppercase;
-  }
-
-  .headliner-body {
+  /* ── ARTICLE STYLES ───────────────────────── */
+  .article-wrapper {
+    max-width: 800px; 
+    margin: 0 auto;
     padding: 24px 16px;
   }
 
-  .headliner-kicker {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 9px;
-    color: var(--accent);
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-  }
-
-  .headliner-headline {
-    font-family: 'Playfair Display', serif;
-    font-size: 28px;
-    font-weight: 900;
-    color: var(--ink);
-    line-height: 1.15;
-    margin-bottom: 16px;
-    transition: text-decoration 0.15s;
-  }
-
-  .headliner-deck {
-    font-size: 14px;
-    color: var(--mid);
-    line-height: 1.6;
-    margin-bottom: 20px;
-    padding-left: 12px;
-    border-left: 3px solid var(--red);
-  }
-
-  .headliner-meta {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 9px;
-    color: var(--muted);
-  }
-
-  .headliner-meta-author { color: var(--accent); font-weight: 600; }
-
-  /* ── SECTION LABEL ───────────────────────────────── */
-  .section-label {
-    padding: 12px 16px 6px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: var(--bg);
-  }
-
-  .section-label-text {
+  .section-tag {
+    display: inline-block;
     font-family: 'IBM Plex Mono', monospace;
     font-size: 9px;
     font-weight: 600;
-    color: var(--mid);
     letter-spacing: 0.2em;
+    color: var(--red);
+    border: 1px solid rgba(204,31,31,0.35);
+    padding: 4px 8px;
+    margin-bottom: 16px;
     text-transform: uppercase;
   }
 
-  .section-label-line { flex: 1; height: 1px; background: var(--line-strong); }
-
-  .section-label-more {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 8px;
-    color: var(--muted);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-
-  /* ── CARD GRID ───────────────────────────────────── */
-  .card-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1px;
-    background: var(--line-strong);
-    border-top: 1px solid var(--line-strong);
-    border-bottom: 1px solid var(--line-strong);
-  }
-
-  .card {
-    background: var(--bg-card);
-    padding: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    cursor: pointer;
-    transition: background 0.15s;
-  }
-  
-  .card:hover { 
-    background: #13181f; 
-  }
-  
-  .card:hover .card-hl {
-    text-decoration: underline;
-    text-decoration-color: var(--accent);
-    text-decoration-thickness: 1px;
-    text-underline-offset: 3px;
-  }
-
-  .card-thumb {
-    width: 100%;
-    aspect-ratio: 16/9;
-    position: relative;
-    overflow: hidden;
-    margin-bottom: 2px;
-    background: var(--bg-card);
-  }
-  
-  .card-thumb img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-
-  .card-cat {
-    position: absolute;
-    top: 8px;
-    left: 8px;
-    z-index: 2;
-    background: var(--bg);
-    padding: 2px 6px;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 8px;
-    color: var(--accent);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    font-weight: 600;
-  }
-
-  .card-hl {
+  .article-headline {
     font-family: 'Playfair Display', serif;
-    font-size: 13px;
-    font-weight: 700;
-    line-height: 1.3;
+    font-size: 32px;
+    font-weight: 900;
+    line-height: 1.15;
     color: var(--ink);
-    margin-top: 6px;
-    transition: text-decoration 0.15s;
+    margin-bottom: 12px;
   }
 
-  .card-time {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 8px;
-    color: var(--muted);
-    margin-top: auto;
-  }
-
-  /* ── OPINION ─────────────────────────────────────── */
-  .opinion-strip {
-    background: var(--bg-panel);
-    padding: 16px;
-    border-top: 1px solid var(--line-strong);
-    border-bottom: 1px solid var(--line-strong);
-    position: relative;
-    overflow: hidden;
-    display: block; 
-    transition: background 0.15s;
-  }
-  
-  .opinion-strip:hover {
-    background: #13181f;
-  }
-
-  .opinion-strip:hover .opinion-quote {
-    text-decoration: underline;
-    text-decoration-color: var(--accent);
-    text-decoration-thickness: 1px;
-    text-underline-offset: 3px;
-  }
-
-  .opinion-bg-text {
-    position: absolute;
-    top: -10px; right: -5px;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 110px;
-    color: rgba(255,255,255,0.02);
-    line-height: 1;
-    pointer-events: none;
-  }
-
-  .opinion-tag {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 8px;
-    letter-spacing: 0.18em;
-    color: var(--accent);
-    text-transform: uppercase;
-    margin-bottom: 10px;
-  }
-
-  .opinion-quote {
-    font-family: 'Playfair Display', serif;
+  .article-deck {
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 16px;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--mid);
+    border-left: 3px solid var(--red);
+    padding-left: 14px;
+    margin-bottom: 16px;
+  }
+
+  .article-byline {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    margin-bottom: 24px;
+  }
+
+  .article-byline b { color: var(--mid); }
+
+  .article-main-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    background: var(--bg-card); 
+  }
+
+  .image-caption {
+    padding: 8px 0px 24px;
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--muted);
+    font-size: 11px;
+  }
+
+  .article-body p {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.75;
+    color: var(--ink);
+    margin-bottom: 20px;
+  }
+
+  /* Dropcap Styling */
+  .article-body p:first-child::first-letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 900;
+    line-height: 0.8;
+    float: left;
+    margin-right: 10px;
+    margin-top: 6px;
+    color: var(--red);
+  }
+
+  .pull-quote {
+    border-top: 2px solid var(--red);
+    border-bottom: 1px solid var(--line-strong);
+    padding: 24px 0;
+    margin: 32px 0;
+  }
+
+  .pull-quote-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
     font-style: italic;
     font-weight: 700;
-    color: var(--ink);
     line-height: 1.45;
-    border-left: 2px solid var(--red);
-    padding-left: 12px;
+    color: var(--ink);
     margin-bottom: 12px;
-    transition: text-decoration 0.15s;
   }
 
-  .opinion-attr { display: flex; align-items: center; gap: 10px; }
+  .pull-quote-attr {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    font-style: normal;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
 
-  .opinion-avatar {
-    width: 32px; height: 32px;
+  .section-divider {
+    height: 1px;
+    background: var(--line-strong);
+    margin: 32px 0;
+  }
+
+  .article-h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--ink);
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+
+  .fw-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px 0;
+  }
+
+  .fw-list__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .fw-list__dot {
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
-    background: var(--bg-card);
-    border: 1px solid var(--line-strong);
+    background: var(--red);
+    flex-shrink: 0;
+    margin-top: 10px;
+  }
+
+  /* ── TAGS ───────────────────────────────────────── */
+  .tags-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 32px 0;
+    border-top: 1px solid var(--line-strong);
+    margin-top: 24px;
+  }
+
+  .tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--mid);
+    text-transform: uppercase;
+    border: 1px solid var(--muted);
+    padding: 4px 10px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .tag:hover { color: var(--ink); border-color: var(--ink); }
+
+  /* ── RELATED ARTICLES ───────────────────────────── */
+  .related-section {
+    padding: 24px 0;
+    border-top: 1px solid var(--line-strong);
+  }
+
+  .related-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 20px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px;
-    color: var(--mid);
-    flex-shrink: 0;
-    overflow: hidden;
-  }
-
-  .opinion-avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 25%;
-    display: block;
-  }
-
-  .opinion-name { font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 600; color: var(--ink); }
-  .opinion-title-text { font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: var(--muted); }
-
-  /* ── LIST ARTICLES ───────────────────────────────── */
-  .list-article {
-    display: flex;
     gap: 12px;
-    padding: 12px 16px;
+  }
+
+  .related-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--line-strong);
+  }
+
+  .related-card {
+    display: flex;
+    gap: 16px;
+    padding: 16px 0;
     border-bottom: 1px solid var(--line);
     cursor: pointer;
-    background: var(--bg);
     transition: background 0.15s;
   }
   
-  .list-article:hover { 
+  .related-card:hover { 
     background: #13181f; 
   }
   
-  .list-article:hover .list-hl {
+  .related-card:hover .related-headline {
     text-decoration: underline;
     text-decoration-color: var(--accent);
     text-decoration-thickness: 1px;
     text-underline-offset: 3px;
   }
 
-  .list-num {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 20px;
-    color: var(--muted);
-    opacity: 0.5;
-    line-height: 1;
-    flex-shrink: 0;
-    width: 24px;
-    text-align: center;
+  .related-card:last-child { border-bottom: none; }
+
+  .related-info { 
+    flex: 1; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    padding: 0 12px;
   }
 
-  .list-content { flex: 1; }
-
-  .list-cat {
+  .related-section-tag {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 8px;
-    color: var(--accent);
-    letter-spacing: 0.1em;
+    font-size: 9px;
+    font-weight: 600;
+    color: var(--red);
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    margin-bottom: 3px;
+    margin-bottom: 6px;
   }
 
-  .list-hl {
+  .related-headline {
     font-family: 'Playfair Display', serif;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 700;
     line-height: 1.3;
     color: var(--ink);
-    margin-bottom: 4px;
+    margin-bottom: 6px;
     transition: text-decoration 0.15s;
   }
 
-  .list-meta { font-family: 'IBM Plex Mono', monospace; font-size: 8.5px; color: var(--muted); }
-
-  /* ── AQI PANEL ───────────────────────────────────── */
-  .aqi-panel {
-    padding: 16px;
-    background: var(--bg-panel);
-    border-top: 1px solid var(--line-strong);
-    border-bottom: 1px solid var(--line-strong);
-  }
-
-  .aqi-panel-title {
+  .related-time {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 9px;
-    letter-spacing: 0.18em;
-    color: var(--mid);
-    text-transform: uppercase;
-    margin-bottom: 14px;
-  }
-
-  .aqi-cities { display: flex; flex-direction: column; gap: 9px; }
-
-  .aqi-city-row { display: flex; align-items: center; gap: 10px; }
-
-  .aqi-city-name {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 10px;
-    color: var(--mid);
-    width: 96px;
-    flex-shrink: 0;
-  }
-
-  .aqi-bar-track { flex: 1; height: 2px; background: var(--line-strong); }
-
-  .aqi-bar-fill { height: 100%; transition: width 1s ease; }
-
-  .aqi-number {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 10px;
-    font-weight: 600;
-    width: 34px;
-    text-align: right;
-    flex-shrink: 0;
-  }
-
-  .aqi-status-badge {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 7px;
+    color: var(--muted);
     letter-spacing: 0.06em;
-    padding: 2px 5px;
-    flex-shrink: 0;
-    text-transform: uppercase;
-    border: 1px solid currentColor;
-    border-radius: 1px;
   }
 
-  /* ── FOOTER ──────────────────────────────────────── */
+  /* ── FOOTER ─────────────────────────────────────── */
   .footer {
     background: var(--bg-panel);
     border-top: 1px solid var(--line-strong);
@@ -797,7 +655,7 @@
     letter-spacing: 0.1em;
   }
 
-  /* ── DESKTOP RESPONSIVENESS ──────────────────────── */
+  /* ── DESKTOP RESPONSIVENESS ─────────────────────── */
   @media (min-width: 768px) {
     .masthead-inner {
       padding: 24px 32px 16px; 
@@ -817,42 +675,41 @@
       max-height: 90px;
     }
 
-    .headliner {
-      flex-direction: row;
-      align-items: stretch;
-    }
-    .headliner-img-placeholder {
-      width: 60%;
-      aspect-ratio: auto;
-      min-height: 450px;
-    }
-    .headliner-body {
-      width: 40%;
-      padding: 48px 40px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-    .headliner-headline {
-      font-size: 40px;
-      margin-bottom: 24px;
-    }
-    .headliner-deck {
-      font-size: 18px;
-      margin-bottom: 32px;
-    }
-    .headliner-meta {
-      font-size: 11px;
-    }
-
-    .card-grid {
-      grid-template-columns: repeat(4, 1fr); 
-    }
-
     .footer-top {
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
+    }
+
+    /* Scaling up Article Typography for Desktop */
+    .article-headline {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+    .article-deck {
+      font-size: 20px;
+      margin-bottom: 24px;
+    }
+    .article-body p {
+      font-size: 18px;
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+    .article-body p:first-child::first-letter {
+      font-size: 68px;
+      margin-top: 8px;
+    }
+    .pull-quote-text {
+      font-size: 26px;
+    }
+    .article-h2 {
+      font-size: 32px;
+    }
+    .fw-list__dot {
+      margin-top: 12px;
+    }
+    .related-headline {
+      font-size: 18px;
     }
   }
 </style>
@@ -883,8 +740,8 @@
 
 <nav class="nav-strip">
   <div class="container nav-inner">
-    <a href="index.html" class="nav-item active">Today</a>
-    <a href="politics.html" class="nav-item">Politics</a>
+    <a href="index.html" class="nav-item">Today</a>
+    <a href="politics.html" class="nav-item active">Politics</a>
     <a href="economy.html" class="nav-item">Economy</a>
     <a href="lagos.html" class="nav-item">Lagos</a>
     <a href="world.html" class="nav-item">World</a>
@@ -894,148 +751,99 @@
   </div>
 </nav>
 
-<a href="breaking-news-gop.html" class="breaking article-link">
+<a href="breaking-news.html" class="breaking article-link">
   <div class="container breaking-inner">
     <span class="breaking-tag">BREAKING</span>
-    <span class="breaking-text">Further sexual assault allegations against GOP leadership emerge · Live updates</span>
+    <span class="breaking-text">[Breaking News Headline placeholder] · Live updates</span>
   </div>
 </a>
 
 <main class="container site-main">
   
-  <a href="politics-democracy-begins.html" class="headliner article-link">
-    <div class="headliner-img-placeholder">
-      <img src="assets/img/national-assembly.webp" alt="Outside of the National Assembly">
-      <span class="headliner-label">Cover Story</span>
+  <article class="article-wrapper">
+    
+    <header class="article-header">
+      <div class="section-tag">[CATEGORY]</div>
+      <h1 class="article-headline">[ARTICLE HEADLINE]</h1>
+      <p class="article-deck">[Article deck or sub-headline goes here.]</p>
+      <div class="article-byline">By <b>[AUTHOR NAME]</b> · [Date e.g., 8 May 2058]</div>
+      
+      <img src="assets/img/placeholder.webp" class="article-main-img" alt="[Image Placeholder]">
+      <div class="image-caption">[Main Image Caption Goes Here]</div>
+    </header>
+    
+    <div class="article-body">
+      <p>First paragraph. The very first letter of this paragraph will automatically be styled as a large drop-cap.]</p>
+
+      <p>[Second paragraph of the article. Use these standard paragraph tags for the majority of your article text.]</p>
+
+      <div class="pull-quote">
+        <div class="pull-quote-text">"[This is a pull quote.]"</div>
+        <div class="pull-quote-attr">— [Quote Attribution]</div>
+      </div>
+
+      <p>[Third paragraph.]</p>
+
+      <div class="section-divider"></div>
+
+      <h2 class="article-h2">[Subheadline for a new section]</h2>
+
+      <p>[Paragraph introducing a list or specific points.]</p>
+
+      <ul class="fw-list">
+        <li class="fw-list__item">
+          <span class="fw-list__dot"></span>
+          <p><b>[List Item Title]:</b> [List item description text.]</p>
+        </li>
+        <li class="fw-list__item">
+          <span class="fw-list__dot"></span>
+          <p><b>[List Item Title]:</b> [List item description text.]</p>
+        </li>
+        <li class="fw-list__item">
+          <span class="fw-list__dot"></span>
+          <p><b>[List Item Title]:</b> [List item description text.]</p>
+        </li>
+      </ul>
+
+      <p>[Concluding paragraph wrapping up the article.]</p>
     </div>
-    <div class="headliner-body">
-      <div class="headliner-kicker">POLITICS · NATIONAL ASSEMBLY</div>
-      <h1 class="headliner-headline">Nigerian democracy begins amidst fierce debate and chaos</h1>
-      <p class="headliner-deck">The first day of the National Assembly has been filled with both excitement and chaos, from fierce disputes over constitutional amendments to shocking accusations during the judiciary hearing.</p>
-      <div class="headliner-meta">
-        <span class="headliner-meta-author">Abraham Mutfwang</span>
-        <span>·</span>
-        <span>1 hr ago</span>
-        <span>·</span>
-        <span>5 min read</span>
-      </div>
+
+    <div class="tags-row">
+      <span class="tag">[Tag 1]</span>
+      <span class="tag">[Tag 2]</span>
+      <span class="tag">[Tag 3]</span>
+      <span class="tag">[Tag 4]</span>
     </div>
-  </a>
 
-  <div class="aqi-panel">
-    <div class="aqi-panel-title">⬡ Air Quality Index — Nigerian Cities · Live</div>
-    <div class="aqi-cities" id="aqiCities">
-      </div>
-  </div>
+    <div class="related-section">
+      <div class="related-title">More Stories</div>
 
-  <div class="section-label">
-    <span class="section-label-text">Top Stories</span>
-    <span class="section-label-line"></span>
-    <span class="section-label-more">See All →</span>
-  </div>
+      <a href="article-placeholder.html" class="related-card article-link">
+        <div class="related-info">
+          <div class="related-section-tag">[Category]</div>
+          <div class="related-headline">[Related Article Headline 1]</div>
+          <div class="related-time">[Time ago]</div>
+        </div>
+      </a>
 
-  <div class="card-grid">
-    <a href="makoko-museum.html" class="card article-link">
-      <div class="card-thumb">
-        <img src="assets/img/makoko-museum.webp" alt="City Museum">
-        <span class="card-cat">Culture</span>
-      </div>
-      <p class="card-hl">City museum opens in New Makoko on 10th anniversary of foundation</p>
-      <span class="card-time">2 hrs ago</span>
-    </a>
+      <a href="article-placeholder.html" class="related-card article-link">
+        <div class="related-info">
+          <div class="related-section-tag">[Category]</div>
+          <div class="related-headline">[Related Article Headline 2]</div>
+          <div class="related-time">[Time ago]</div>
+        </div>
+      </a>
 
-    <a href="water-tests.html" class="card article-link">
-      <div class="card-thumb">
-        <img src="assets/img/water-tests.webp" alt="Water Tests">
-        <span class="card-cat">Tech</span>
-      </div>
-      <p class="card-hl">New Makoko water tests pass with flying colours</p>
-      <span class="card-time">5 hrs ago</span>
-    </a>
-
-    <a href="build-your-own-parliament.html" class="card article-link">
-      <div class="card-thumb">
-        <img src="assets/img/government-builder.webp" alt="Rail Expansion">
-        <span class="card-cat">Politics</span>
-      </div>
-      <p class="card-hl">Can you build a governing coalition?</p>
-      <span class="card-time">8 hrs ago</span>
-    </a>
-
-    <a href="pallas-cat.html" class="card article-link">
-      <div class="card-thumb">
-        <img src="assets/img/pallas-cat.webp" alt="Zoo Pallas Cat">
-        <span class="card-cat">Culture</span>
-      </div>
-      <p class="card-hl">Lagos zoo welcomes new Pallas cat</p>
-      <span class="card-time">10 hrs ago</span>
-    </a>
-  </div>
-
-  <a href="editorial-socialism.html" class="opinion-strip article-link">
-    <div class="opinion-bg-text">OPINION</div>
-    <div class="opinion-tag">◈ Editorial</div>
-    <blockquote class="opinion-quote">"Socialism isn't a dirty word anymore"</blockquote>
-    <div class="opinion-attr">
-      <div class="opinion-avatar">
-        <img src="assets/img/author-avatar.webp" alt="Leon Laoye">
-      </div>
-      <div>
-        <div class="opinion-name">Leon Laoye</div>
-        <div class="opinion-title-text">Secretary of Agitation and Propaganda</div>
-      </div>
+      <a href="article-placeholder.html" class="related-card article-link">
+        <div class="related-info">
+          <div class="related-section-tag">[Category]</div>
+          <div class="related-headline">[Related Article Headline 3]</div>
+          <div class="related-time">[Time ago]</div>
+        </div>
+      </a>
     </div>
-  </a>
 
-  <div class="section-label">
-    <span class="section-label-text">Latest</span>
-    <span class="section-label-line"></span>
-    <span class="section-label-more">All News →</span>
-  </div>
-
-  <div id="latestList">
-    <a href="progressive-parties-group.html" class="list-article article-link">
-      <span class="list-num">1</span>
-      <div class="list-content">
-        <div class="list-cat">Politics</div>
-        <div class="list-hl">Progressive parties create joint parliamentary group</div>
-        <div class="list-meta">4 hours ago</div>
-      </div>
-    </a>
-    <a href="friln-chairman.html" class="list-article article-link">
-      <span class="list-num">2</span>
-      <div class="list-content">
-        <div class="list-cat">Politics</div>
-        <div class="list-hl">FRILN chairman reportedly unaware of appointment as deputy speaker, asks "what is a deputy speaker" in the National Assembly</div>
-        <div class="list-meta">5 hours ago</div>
-      </div>
-    </a>
-    <a href="lagos-accident.html" class="list-article article-link">
-      <span class="list-num">3</span>
-      <div class="list-content">
-        <div class="list-cat">Lagos</div>
-        <div class="list-hl">Yet another accident at the main junction to Lagos</div>
-        <div class="list-meta">Yesterday</div>
-      </div>
-    </a>
-    <a href="makoko-rents.html" class="list-article article-link">
-      <span class="list-num">4</span>
-      <div class="list-content">
-        <div class="list-cat">Economy</div>
-        <div class="list-hl">New Makoko apartment rents hit record high for third straight quarter</div>
-        <div class="list-meta">1 hr ago</div>
-      </div>
-    </a>
-    <a href="cassava-blight.html" class="list-article article-link">
-      <span class="list-num">5</span>
-      <div class="list-content">
-        <div class="list-cat">Tech</div>
-        <div class="list-hl">Researchers at University of Nigeria announce breakthrough in cassava blight resistance</div>
-        <div class="list-meta">2 hrs ago</div>
-      </div>
-    </a>
-  </div>
-
+  </article>
 </main>
 
 <footer class="footer">
@@ -1127,37 +935,41 @@ buildTicker();
 
 // Build AQI panel
 const panel = document.getElementById('aqiCities');
-aqiData.forEach(d => {
-  const pct = Math.min((d.aqi / 300) * 100, 100);
-  panel.innerHTML += `
-    <div class="aqi-city-row">
-      <span class="aqi-city-name">${d.city}</span>
-      <div class="aqi-bar-track">
-        <div class="aqi-bar-fill" style="width:${pct}%; background:${d.color}"></div>
-      </div>
-      <span class="aqi-number" style="color:${d.color}">${d.aqi}</span>
-      <span class="aqi-status-badge" style="background:${d.color}22; color:${d.color}">${d.status}</span>
-    </div>`;
-});
+if(panel) {
+  aqiData.forEach(d => {
+    const pct = Math.min((d.aqi / 300) * 100, 100);
+    panel.innerHTML += `
+      <div class="aqi-city-row">
+        <span class="aqi-city-name">${d.city}</span>
+        <div class="aqi-bar-track">
+          <div class="aqi-bar-fill" style="width:${pct}%; background:${d.color}"></div>
+        </div>
+        <span class="aqi-number" style="color:${d.color}">${d.aqi}</span>
+        <span class="aqi-status-badge" style="background:${d.color}22; color:${d.color}">${d.status}</span>
+      </div>`;
+  });
+}
 
 // Click/touch drag scrolling for nav strip
 const nav = document.querySelector('.nav-strip');
 let isDown = false, startX, scrollLeft;
 
-nav.addEventListener('mousedown', e => {
-  isDown = true;
-  nav.style.cursor = 'grabbing';
-  startX = e.pageX - nav.offsetLeft;
-  scrollLeft = nav.scrollLeft;
-});
-nav.addEventListener('mouseleave', () => { isDown = false; nav.style.cursor = ''; });
-nav.addEventListener('mouseup', () => { isDown = false; nav.style.cursor = ''; });
-nav.addEventListener('mousemove', e => {
-  if (!isDown) return;
-  e.preventDefault();
-  const x = e.pageX - nav.offsetLeft;
-  nav.scrollLeft = scrollLeft - (x - startX);
-});
+if(nav) {
+  nav.addEventListener('mousedown', e => {
+    isDown = true;
+    nav.style.cursor = 'grabbing';
+    startX = e.pageX - nav.offsetLeft;
+    scrollLeft = nav.scrollLeft;
+  });
+  nav.addEventListener('mouseleave', () => { isDown = false; nav.style.cursor = ''; });
+  nav.addEventListener('mouseup', () => { isDown = false; nav.style.cursor = ''; });
+  nav.addEventListener('mousemove', e => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - nav.offsetLeft;
+    nav.scrollLeft = scrollLeft - (x - startX);
+  });
+}
 </script>
 
 </body>
