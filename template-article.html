@@ -23,64 +23,70 @@
   </div>
 </a>
 
-<main class="container site-main">
+<main class="site-main">
   
-  <article class="article-wrapper">
-    
+  <article>
     <header class="article-header">
-      <div class="section-tag">[CATEGORY]</div>
-      <h1 class="article-headline">[ARTICLE HEADLINE]</h1>
-      <p class="article-deck">[Article deck or sub-headline goes here.]</p>
-      <div class="article-byline">By <b>[AUTHOR NAME]</b> · [Date e.g., 8 May 2058]</div>
+      <div class="header-text-container">
+        <div class="section-tag">[CATEGORY]</div>
+        <h1 class="article-headline">[ARTICLE HEADLINE]</h1>
+        <p class="article-deck">[Article deck or sub-headline goes here. Make it a bit descriptive to pull the reader in.]</p>
+        <div class="article-byline">By <b>[AUTHOR NAME]</b> · [Date e.g., 8 May 2058]</div>
+      </div>
       
-      <img src="assets/img/placeholder.webp" class="article-main-img" alt="[Image Placeholder]">
-      <div class="image-caption">[Main Image Caption Goes Here]</div>
+      <div class="header-image-container">
+        <img src="assets/img/placeholder.webp" class="article-main-img" alt="[Image Placeholder]">
+        <div class="image-caption">[Main Image Caption Goes Here]</div>
+      </div>
     </header>
     
-    <div class="article-body">
-      <p>First paragraph. The very first letter of this paragraph will automatically be styled as a large drop-cap.]</p>
+    <div class="article-content-wrapper">
+      <div class="article-body">
+        <p>[First paragraph. The very first letter of this paragraph will automatically be styled as a large drop-cap.]</p>
 
-      <p>[Second paragraph of the article. Use these standard paragraph tags for the majority of your article text.]</p>
+        <p>[Second paragraph of the article. Use these standard paragraph tags for the majority of your article text. It should perfectly mimic the visual flow established in the original files.]</p>
 
-      <div class="pull-quote">
-        <div class="pull-quote-text">"[This is a pull quote.]"</div>
-        <div class="pull-quote-attr">— [Quote Attribution]</div>
+        <div class="pull-quote">
+          <div class="pull-quote-text">"[This is an eye-catching pull quote styled identically to the original layout.]"</div>
+          <div class="pull-quote-attr">— [Quote Attribution]</div>
+        </div>
+
+        <p>[Third paragraph. Following the quote to continue the flow of the narrative.]</p>
+
+        <div class="section-divider"></div>
+
+        <h2 class="article-h2">[Subheadline for a new section]</h2>
+
+        <p>[Paragraph introducing a list or specific points down below.]</p>
+
+        <ul class="fw-list">
+          <li class="fw-list__item">
+            <span class="fw-list__dot"></span>
+            <p><b>[List Item Title]:</b> [List item description text providing more details.]</p>
+          </li>
+          <li class="fw-list__item">
+            <span class="fw-list__dot"></span>
+            <p><b>[List Item Title]:</b> [List item description text providing more details.]</p>
+          </li>
+          <li class="fw-list__item">
+            <span class="fw-list__dot"></span>
+            <p><b>[List Item Title]:</b> [List item description text providing more details.]</p>
+          </li>
+        </ul>
+
+        <p>[Concluding paragraph wrapping up the article.]</p>
       </div>
 
-      <p>[Third paragraph.]</p>
+      <div class="tags-row">
+        <span class="tag">[Tag 1]</span>
+        <span class="tag">[Tag 2]</span>
+        <span class="tag">[Tag 3]</span>
+        <span class="tag">[Tag 4]</span>
+      </div>
 
-      <div class="section-divider"></div>
-
-      <h2 class="article-h2">[Subheadline for a new section]</h2>
-
-      <p>[Paragraph introducing a list or specific points.]</p>
-
-      <ul class="fw-list">
-        <li class="fw-list__item">
-          <span class="fw-list__dot"></span>
-          <p><b>[List Item Title]:</b> [List item description text.]</p>
-        </li>
-        <li class="fw-list__item">
-          <span class="fw-list__dot"></span>
-          <p><b>[List Item Title]:</b> [List item description text.]</p>
-        </li>
-        <li class="fw-list__item">
-          <span class="fw-list__dot"></span>
-          <p><b>[List Item Title]:</b> [List item description text.]</p>
-        </li>
-      </ul>
-
-      <p>[Concluding paragraph wrapping up the article.]</p>
-    </div>
-
-    <div class="tags-row">
-      <span class="tag">[Tag 1]</span>
-      <span class="tag">[Tag 2]</span>
-      <span class="tag">[Tag 3]</span>
-      <span class="tag">[Tag 4]</span>
-    </div>
   </article>
-    <div class="container">
+
+  <div class="container">
 
   <div class="section-label">
     <span class="section-label-text">More Stories</span>
@@ -126,6 +132,7 @@
   </div>
 
   </div>
+
 </main>
 
 <div id="footer-placeholder"></div>
