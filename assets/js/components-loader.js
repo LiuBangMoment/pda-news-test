@@ -31,28 +31,12 @@ function setActiveNav() {
 
 // Re-initialize scripts that depend on the injected HTML
 function initInjectedScripts() {
-    // 1. Re-build AQI ticker (from index.html logic)
-    if (typeof buildTicker === 'function') buildTicker();
-    
-    // 2. Re-build AQI panel (from index.html logic)
-    const panel = document.getElementById('aqiCities');
-    if (panel && typeof aqiData !== 'undefined') {
-        panel.innerHTML = ''; // clear placeholder
-        aqiData.forEach(d => {
-            const pct = Math.min((d.aqi / 300) * 100, 100);
-            panel.innerHTML += `
-                <div class="aqi-city-row">
-                    <span class="aqi-city-name">${d.city}</span>
-                    <div class="aqi-bar-track">
-                        <div class="aqi-bar-fill" style="width:${pct}%; background:${d.color}"></div>
-                    </div>
-                    <span class="aqi-number" style="color:${d.color}">${d.aqi}</span>
-                    <span class="aqi-status-badge" style="background:${d.color}22; color:${d.color}">${d.status}</span>
-                </div>`;
-        });
+    // 1. Initialize AQI components (Ticker and Panel)
+    if (typeof window.initAQI === 'function') {
+        window.initAQI();
     }
 
-    // 3. Re-initialize Nav scrolling
+    // 2. Re-initialize Nav scrolling
     const nav = document.querySelector('.nav-strip');
     if (nav) {
         let isDown = false, startX, scrollLeft;
@@ -72,7 +56,7 @@ function initInjectedScripts() {
         });
     }
 
-    // 4. Trigger relative time update
+    // 3. Trigger relative time update
     if (typeof updateRelativeTimes === 'function') updateRelativeTimes();
 }
 
