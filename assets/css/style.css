@@ -10,6 +10,7 @@
   --muted: #7890a8;  
   --line: rgba(255,255,255,0.06);
   --line-strong: rgba(255,255,255,0.1);
+  --padding-x: 16px; 
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -104,7 +105,7 @@ body {
 }
 
 .masthead-inner {
-  padding: 20px 16px 16px; 
+  padding: 20px var(--padding-x) 16px; 
 }
 
 .masthead-top {
@@ -218,6 +219,10 @@ body {
   transition: background 0.15s;
 }
 
+.hide-breaking .breaking {
+  display: none;
+}
+
 .breaking:hover {
   background: #13181f;
 }
@@ -230,7 +235,7 @@ body {
 }
 
 .breaking-inner {
-  padding: 8px 14px;
+  padding: 8px var(--padding-x);
   display: flex;
   align-items: center;
   justify-content: center; 
@@ -263,88 +268,99 @@ body {
 }
 
 /* ── ARTICLE STYLES ─────────────────────────────── */
-.article-wrapper {
-  max-width: 800px; 
-  margin: 0 auto;
-  padding: 24px 16px;
+.article-header {
+  background: var(--bg-panel);
+  padding: 18px var(--padding-x) 14px;
+  border-bottom: 1px solid var(--line-strong);
 }
 
 .section-tag {
   display: inline-block;
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 9px;
+  font-size: 7px;
   font-weight: 600;
   letter-spacing: 0.2em;
   color: var(--red);
   border: 1px solid rgba(204,31,31,0.35);
-  padding: 4px 8px;
-  margin-bottom: 16px;
+  padding: 2px 6px;
+  margin-bottom: 10px;
   text-transform: uppercase;
 }
 
 .article-headline {
   font-family: 'Playfair Display', serif;
-  font-size: 32px;
+  font-size: 24px;
   font-weight: 900;
   line-height: 1.15;
   color: var(--ink);
-  margin-bottom: 12px;
+  margin-bottom: 9px;
 }
 
 .article-deck {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 16px;
+  font-size: 13px;
   font-weight: 300;
   line-height: 1.6;
   color: var(--mid);
-  border-left: 3px solid var(--red);
-  padding-left: 14px;
-  margin-bottom: 16px;
+  border-left: 2px solid var(--red);
+  padding-left: 11px;
+  margin-bottom: 12px;
 }
 
-.article-byline {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-  color: var(--muted);
-  letter-spacing: 0.06em;
-  margin-bottom: 24px;
-}
-
+.article-byline { font-family: 'IBM Plex Mono', monospace; font-size: 8px; color: var(--muted); letter-spacing: 0.06em; }
 .article-byline b { color: var(--mid); }
 
+.header-image-container { margin-top: 16px; }
+
 .article-main-img {
-  width: 100%;
+  width: calc(100% + (var(--padding-x) * 2));
+  margin-left: calc(var(--padding-x) * -1);
   height: auto;
   display: block;
-  background: var(--bg-card); 
 }
 
 .image-caption {
-  padding: 8px 0px 24px;
   font-family: 'IBM Plex Mono', monospace;
-  color: var(--muted);
+  color: var(--mid);
   font-size: 11px;
+  padding: 8px 0;
+  position: relative; 
 }
 
+.article-content-wrapper { max-width: 800px; margin: 0 auto; }
+.article-body { padding: 20px var(--padding-x); }
 .article-body p {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 400;
   line-height: 1.75;
   color: var(--ink);
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
-/* Dropcap Styling */
 .article-body p:first-child::first-letter {
   font-family: 'Playfair Display', serif;
   font-size: 52px;
   font-weight: 900;
   line-height: 0.8;
   float: left;
-  margin-right: 10px;
-  margin-top: 6px;
+  margin-right: 8px;
+  margin-top: 4px;
   color: var(--red);
+}
+
+.article-body img {
+  width: calc(100% + (var(--padding-x) * 2));
+  margin-left: calc(var(--padding-x) * -1);
+  height: auto;
+  display: block;
+  padding: 16px 0px 7px;
+}
+
+.article-wrapper {
+  max-width: 800px; 
+  margin: 0 auto;
+  padding: 24px 16px;
 }
 
 .pull-quote {
@@ -613,7 +629,7 @@ body {
 .headliner-meta-author { color: var(--accent); font-weight: 600; }
 
 .section-label {
-  padding: 12px 16px 6px;
+  padding: 32px 16px 12px;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -1060,9 +1076,7 @@ body {
 
 /* ── INTERACTIVE APP STYLES (PARLIAMENT) ───────── */
 .viz-module {
-  background: var(--bg-card);
-  border: 1px solid var(--line-strong);
-  padding: 32px 16px;
+  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1070,17 +1084,17 @@ body {
 
 .viz-module svg {
   width: 100%;
-  max-width: 500px;
+  max-width: 800px;
   height: auto;
   overflow: visible;
 }
 
 .status-panel {
-  margin-top: 32px;
+  margin-top: 48px;
   width: 100%;
-  max-width: 500px;
+  max-width: 800px;
   border-top: 1px solid var(--line-strong);
-  padding-top: 24px;
+  padding-top: 32px;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
@@ -1286,6 +1300,7 @@ body {
   background: var(--bg-panel);
   border-top: 1px solid var(--line-strong);
   padding: 24px 16px; 
+  margin-top: 40px;
 }
 
 .footer-inner {
@@ -1303,6 +1318,7 @@ body {
 .footer-logo {
   display: flex;
   align-items: center;
+  margin-top: -8px;
 }
 
 .footer-logo a {
@@ -1409,6 +1425,8 @@ body {
 
 /* ── DESKTOP RESPONSIVENESS ─────────────────────── */
 @media (min-width: 768px) {
+  :root { --padding-x: 40px; }
+
   .masthead-inner {
     padding: 24px 32px 16px; 
   }
@@ -1424,7 +1442,7 @@ body {
   }
 
   .wordmark img {
-    max-height: 90px;
+    max-height: 120px;
   }
 
   .footer-top {
@@ -1434,14 +1452,42 @@ body {
   }
 
   /* Scaling up Article Typography for Desktop */
+  .article-header {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 60px var(--padding-x);
+    display: grid;
+    grid-template-columns: 1fr 1.25fr;
+    align-items: center;
+    gap: 60px;
+    border-bottom: 2px solid var(--line-strong);
+    background: var(--bg);
+  }
+  .header-text-container { display: flex; flex-direction: column; justify-content: center; }
+  .header-image-container { height: 100%; max-height: 80vh; width: 100%; position: relative; margin: 0; }
+  .article-main-img { width: 100%; height: 80vh; object-fit: cover; margin: 0; padding: 0; }
+  .article-main-img.no-fill { height: auto; max-height: 60vh; object-fit: contain; background: transparent; }
+  .header-image-container .image-caption { position: absolute; bottom: -32px; left: 0; font-size: 11px; }
+  .section-tag { font-size: 10px; padding: 4px 10px; margin-bottom: 24px; align-self: flex-start; }
   .article-headline {
-    font-size: 48px;
-    margin-bottom: 20px;
+    font-size: 64px;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
   }
   .article-deck {
     font-size: 20px;
-    margin-bottom: 24px;
+    line-height: 1.5;
+    border-left: 4px solid var(--red);
+    padding-left: 16px;
+    margin-bottom: 32px;
   }
+  .article-byline {
+    font-size: 10px;
+  }
+  .article-content-wrapper { max-width: 760px; padding-top: 40px; }
+  .article-body { padding: 20px var(--padding-x); }
+  .article-body img { width: 100%; margin-left: 0; padding: 24px 0 12px; }
   .article-body p {
     font-size: 18px;
     line-height: 1.8;

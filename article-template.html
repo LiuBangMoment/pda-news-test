@@ -12,100 +12,104 @@
 
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body data-nav="index">
+<body data-nav="[NAV_CATEGORY]">
 
 <div id="header-placeholder"></div>
 
-<a href="breaking-news.html" class="breaking article-link">
-  <div class="container breaking-inner">
-    <span class="breaking-tag">BREAKING</span>
-    <span class="breaking-text">[Breaking News Headline placeholder] · Live updates</span>
-  </div>
-</a>
-
-<main class="container site-main">
+<main class="site-main">
   
-  <article class="article-wrapper">
+  <article>
     
     <header class="article-header">
-      <div class="section-tag">[CATEGORY]</div>
-      <h1 class="article-headline">[ARTICLE HEADLINE]</h1>
-      <p class="article-deck">[Article deck or sub-headline goes here.]</p>
-      <div class="article-byline">By <b>[AUTHOR NAME]</b> · [Date e.g., 8 May 2058]</div>
+      <div class="header-text-container">
+        <div class="section-tag">[CATEGORY]</div>
+        <h1 class="article-headline">[ARTICLE HEADLINE]</h1>
+        <p class="article-deck">[Article deck or sub-headline goes here.]</p>
+        <div class="article-byline">By <b>[AUTHOR NAME]</b> · [Date e.g., 8 May 2058]</div>
+      </div>
       
-      <img src="assets/img/placeholder.webp" class="article-main-img" alt="[Image Placeholder]">
-      <div class="image-caption">[Main Image Caption Goes Here]</div>
+      <div class="header-image-container">
+        <!-- 
+          IMAGE USAGE:
+          - For standard tall/landscape photos: Use class="article-main-img"
+          - For rectangular logos/graphics: Use class="article-main-img no-fill" 
+        -->
+        <img src="assets/img/placeholder.webp" class="article-main-img" alt="[Image Placeholder]">
+        <div class="image-caption">[Main Image Caption Goes Here]</div>
+      </div>
     </header>
     
-    <div class="article-body">
-      <p>First paragraph. The very first letter of this paragraph will automatically be styled as a large drop-cap.]</p>
+    <div class="article-content-wrapper">
+      <div class="article-body">
+        <p>First paragraph. The very first letter of this paragraph will automatically be styled as a large drop-cap.]</p>
 
-      <p>[Second paragraph of the article. Use these standard paragraph tags for the majority of your article text.]</p>
+        <p>[Second paragraph of the article. Use these standard paragraph tags for the majority of your article text.]</p>
 
-      <div class="pull-quote">
-        <div class="pull-quote-text">"[This is a pull quote.]"</div>
-        <div class="pull-quote-attr">— [Quote Attribution]</div>
+        <div class="pull-quote">
+          <div class="pull-quote-text">"[This is a pull quote.]"</div>
+          <div class="pull-quote-attr">— [Quote Attribution]</div>
+        </div>
+
+        <p>[Third paragraph.]</p>
+
+        <div class="section-divider"></div>
+
+        <h2 class="article-h2">[Subheadline for a new section]</h2>
+
+        <p>[Paragraph introducing a list or specific points.]</p>
+
+        <ul class="fw-list">
+          <li class="fw-list__item">
+            <span class="fw-list__dot"></span>
+            <p><b>[List Item Title]:</b> [List item description text.]</p>
+          </li>
+          <li class="fw-list__item">
+            <span class="fw-list__dot"></span>
+            <p><b>[List Item Title]:</b> [List item description text.]</p>
+          </li>
+          <li class="fw-list__item">
+            <span class="fw-list__dot"></span>
+            <p><b>[List Item Title]:</b> [List item description text.]</p>
+          </li>
+        </ul>
+
+        <p>[Concluding paragraph wrapping up the article.]</p>
       </div>
 
-      <p>[Third paragraph.]</p>
+      <div class="tags-row">
+        <span class="tag">[Tag 1]</span>
+        <span class="tag">[Tag 2]</span>
+        <span class="tag">[Tag 3]</span>
+        <span class="tag">[Tag 4]</span>
+      </div>
 
-      <div class="section-divider"></div>
+      <div class="related-section">
+        <div class="related-title">More Stories</div>
 
-      <h2 class="article-h2">[Subheadline for a new section]</h2>
+        <a href="article-placeholder.html" class="related-card article-link">
+          <div class="related-info">
+            <div class="related-section-tag">[Category]</div>
+            <div class="related-headline">[Related Article Headline 1]</div>
+            <div class="related-time">[Time ago]</div>
+          </div>
+        </a>
 
-      <p>[Paragraph introducing a list or specific points.]</p>
+        <a href="article-placeholder.html" class="related-card article-link">
+          <div class="related-info">
+            <div class="related-section-tag">[Category]</div>
+            <div class="related-headline">[Related Article Headline 2]</div>
+            <div class="related-time">[Time ago]</div>
+          </div>
+        </a>
 
-      <ul class="fw-list">
-        <li class="fw-list__item">
-          <span class="fw-list__dot"></span>
-          <p><b>[List Item Title]:</b> [List item description text.]</p>
-        </li>
-        <li class="fw-list__item">
-          <span class="fw-list__dot"></span>
-          <p><b>[List Item Title]:</b> [List item description text.]</p>
-        </li>
-        <li class="fw-list__item">
-          <span class="fw-list__dot"></span>
-          <p><b>[List Item Title]:</b> [List item description text.]</p>
-        </li>
-      </ul>
-
-      <p>[Concluding paragraph wrapping up the article.]</p>
-    </div>
-
-    <div class="tags-row">
-      <span class="tag">[Tag 1]</span>
-      <span class="tag">[Tag 2]</span>
-      <span class="tag">[Tag 3]</span>
-      <span class="tag">[Tag 4]</span>
-    </div>
-
-    <div class="related-section">
-      <div class="related-title">More Stories</div>
-
-      <a href="article-placeholder.html" class="related-card article-link">
-        <div class="related-info">
-          <div class="related-section-tag">[Category]</div>
-          <div class="related-headline">[Related Article Headline 1]</div>
-          <div class="related-time">[Time ago]</div>
-        </div>
-      </a>
-
-      <a href="article-placeholder.html" class="related-card article-link">
-        <div class="related-info">
-          <div class="related-section-tag">[Category]</div>
-          <div class="related-headline">[Related Article Headline 2]</div>
-          <div class="related-time">[Time ago]</div>
-        </div>
-      </a>
-
-      <a href="article-placeholder.html" class="related-card article-link">
-        <div class="related-info">
-          <div class="related-section-tag">[Category]</div>
-          <div class="related-headline">[Related Article Headline 3]</div>
-          <div class="related-time">[Time ago]</div>
-        </div>
-      </a>
+        <a href="article-placeholder.html" class="related-card article-link">
+          <div class="related-info">
+            <div class="related-section-tag">[Category]</div>
+            <div class="related-headline">[Related Article Headline 3]</div>
+            <div class="related-time">[Time ago]</div>
+          </div>
+        </a>
+      </div>
     </div>
 
   </article>

@@ -106,6 +106,7 @@
 <script>
 // Base Application State
 let maxSeats = 624;
+let activeDraggedParty = null;
 
 // Default array with the EXACT requested order and colors
 let parties = [
@@ -190,7 +191,7 @@ function updateChart() {
     const dotRadius = Math.min(maxDotRadius, (Math.PI * r1) / seatsPerRow[rows-1] / 2 * 0.8);
 
     let dotIndex = 0;
-    renderParties.forEach(party => {
+    renderParties.forEach((party, pIdx) => {
       const seats = parseInt(party.seats || 0);
       for(let i=0; i<seats; i++) {
           if(dotIndex >= positions.length) break;
@@ -205,14 +206,75 @@ function updateChart() {
             circle.setAttribute('fill', 'none');
             circle.setAttribute('stroke', party.color);
             circle.setAttribute('stroke-width', Math.max(1, dotRadius * 0.3));
+            circle.style.cursor = "default";
           } else {
             circle.setAttribute('fill', party.color);
+            circle.dataset.partyIndex = pIdx;
+            
+            // If this is the active dragged party, give it a specific cursor
+            if (activeDraggedParty === party) {
+              circle.style.cursor = 'grabbing';
+            } else {
+              circle.style.cursor = 'grab';
+            }
+            
             if (party.inCoalition) {
               circle.setAttribute('stroke', 'rgba(255,255,255,0.8)');
               circle.setAttribute('stroke-width', Math.max(1, dotRadius * 0.25));
             } else {
               circle.setAttribute('fill-opacity', '0.25');
             }
+
+            let clickStartTime = 0;
+            let startX, startY;
+
+            circle.addEventListener('mousedown', (e) => {
+              activeDraggedParty = party;
+              clickStartTime = Date.now();
+              startX = e.clientX;
+              startY = e.clientY;
+              circle.style.cursor = 'grabbing';
+              
+              const onMouseMove = (moveEvent) => {
+                if (!activeDraggedParty) return;
+                
+                const currentPIdx = parties.indexOf(activeDraggedParty);
+                const elemBelow = document.elementFromPoint(moveEvent.clientX, moveEvent.clientY);
+                
+                if (elemBelow && elemBelow.tagName === 'circle' && elemBelow.dataset.partyIndex !== undefined) {
+                  const targetPIdx = parseInt(elemBelow.dataset.partyIndex);
+                  if (targetPIdx !== -1 && targetPIdx !== currentPIdx) {
+                    // Move the party in the array
+                    const movedItem = parties.splice(currentPIdx, 1)[0];
+                    parties.splice(targetPIdx, 0, movedItem);
+                    
+                    // Don't remove listeners, just re-render. 
+                    // The new dots will pick up the 'activeDraggedParty' state.
+                    fullRender();
+                  }
+                }
+              };
+
+              const onMouseUp = (upEvent) => {
+                const dragDuration = Date.now() - clickStartTime;
+                const dragDist = Math.sqrt(Math.pow(upEvent.clientX - startX, 2) + Math.pow(upEvent.clientY - startY, 2));
+                
+                document.removeEventListener('mousemove', onMouseMove);
+                document.removeEventListener('mouseup', onMouseUp);
+                
+                activeDraggedParty = null;
+                circle.style.cursor = 'grab';
+
+                // If it was a quick click without much movement, toggle coalition
+                if (dragDuration < 250 && dragDist < 5) {
+                  party.inCoalition = !party.inCoalition;
+                  fullRender();
+                }
+              };
+
+              document.addEventListener('mousemove', onMouseMove);
+              document.addEventListener('mouseup', onMouseUp);
+            });
           }
           
           svg.appendChild(circle);
