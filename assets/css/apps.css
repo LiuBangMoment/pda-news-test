@@ -2,6 +2,13 @@
    INTERACTIVE APP STYLES (Parliament Builder, etc.)
    ========================================================================== */
 
+/* ── HEADER OVERWRITE ────────────────────────────────── */
+@media (min-width: 768px) {
+    .article-header {
+        grid-template-columns: 1fr 0fr;
+    }
+}
+
 /* ── VIZ MODULE ────────────────────────────────── */
 .viz-module {
   padding: 0;
