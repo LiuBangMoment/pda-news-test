@@ -365,13 +365,10 @@
   display: flex;
   gap: 12px;
   width: 100%;
-  grid-template-columns: 6fr 3fr;
 }
 
 .add-party-btn, 
 .unselect-party-btn {
-  margin-left: 1fr;
-  flex: 1;
   padding: 12px;
   background: transparent;
   border: 1px dashed var(--muted);
@@ -386,5 +383,7 @@
   text-align: center;
 }
 
+.add-party-btn { flex: 2; }
+.unselect-party-btn { flex: 1; }
 .add-party-btn:hover { color: var(--ink); border-color: var(--ink); }
 .unselect-party-btn:hover { color: var(--red); border-color: var(--red); }
