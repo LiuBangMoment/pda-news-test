@@ -1,531 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Interactive: Build Your Government — Forward!</title>
+<title>Build Your Government — Forward!</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Space+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;600&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="interactive.css">
 </head>
-<body data-nav="politics">
+<body>
 
-<div id="header-placeholder"></div>
+<div class="aqi-bar">
+  <div class="aqi-label">🌫 AQI Nigeria</div>
+  <div class="aqi-track">
+    <div class="aqi-scroll" id="aqiScroll"></div>
+  </div>
+</div>
 
-<header class="topic-header">
-  <div class="container">
-    <h1 class="topic-title">Government Builder</h1>
-    <p class="topic-description">Simulate the balance of power in the Constitutional Assembly. Add new factions, redistribute the seats, and forge your own theoretical majority.</p>
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="masthead-top">
+      <span class="date-line">Thursday · 7 May 2058</span>
+      <span class="edition-pill">Interactive</span>
+    </div>
+    <div class="wordmark">
+      <a href="#"><img src="assets/img/logo.png" alt="Forward!" class="wordmark-logo-full"></a>
+    </div>
+    <p class="masthead-tagline">The Voice of the People · Est. 2057 · Lagos · Abuja · New Makoko · Port Harcourt</p>
   </div>
 </header>
 
-<main class="container">
-  
-  <div class="topic-layout">
-    
-    <div class="topic-main">
-      <div class="viz-module">
-        <svg id="parliament-svg" viewBox="0 0 400 230"></svg>
-        
-        <div class="status-panel" id="status-panel">
+<nav class="nav-strip" id="navStrip">
+  <div class="nav-inner">
+    <a href="#" class="nav-item">Today</a>
+    <a href="#" class="nav-item active">Politics</a>
+    <a href="#" class="nav-item">Economy</a>
+    <a href="#" class="nav-item">Lagos</a>
+    <a href="#" class="nav-item">World</a>
+    <a href="#" class="nav-item">Tech</a>
+    <a href="#" class="nav-item">Culture</a>
+    <a href="#" class="nav-item">Sport</a>
+  </div>
+</nav>
+
+<a href="#" class="breaking article-link">
+  <div class="breaking-inner">
+    <span class="breaking-tag">BREAKING</span>
+    <span class="breaking-text">Al-Shahid Attack On Police Station Kills Three · Live Updates</span>
+  </div>
+</a>
+
+<main class="site-main">
+  <article>
+    <div class="article-wrapper">
+      <div class="section-tag">Politics · Interactive</div>
+      <h1 class="article-headline">Build Your Own Government</h1>
+      <p class="article-deck">
+        Now that the results of the Constitutional Convention election have been announced, the most difficult task remains — forming a coalition government. Try your hand at forming a stable government that will be able to lead Nigeria into the future.
+      </p>
+      <div class="article-byline">By <b>Forward! Politics Desk</b> · 7 May 2058</div>
+    </div>
+
+    <div class="interactive-tool-container container">
+      
+      <div class="tool-left-col">
+        <div class="majority-bar-wrap">
+          <div class="majority-label-row">
+            <div>
+              <div class="majority-label">Coalition seats</div>
+              <div class="majority-count far" id="coalitionCount">0</div>
+            </div>
+            <div style="text-align:right;">
+              <div class="majority-label">Majority needed</div>
+              <div id="majorityNeededText" class="majority-needed-val">312 / 624</div>
+            </div>
           </div>
+          <div class="bar-track">
+            <div class="bar-fill-wrap" id="barFill"></div>
+            <div class="bar-majority-line" data-majority="312"></div>
+          </div>
+          <div class="majority-status-row">
+            <div class="coalition-seats-label" id="seatGap">Toggle parties below to build a coalition</div>
+            <div class="majority-badge far" id="majorityBadge">No Majority</div>
+          </div>
+        </div>
+
+        <div class="parliament-wrap">
+          <svg id="parliament-svg" viewBox="0 0 398 210" xmlns="http://www.w3.org/2000/svg"></svg>
+        </div>
+
+        <div class="coalition-summary">
+          <div class="coalition-label">Your coalition</div>
+          <div class="coalition-parties-row" id="coalitionChips">
+            <span class="coalition-empty">No parties selected — toggle parties above</span>
+          </div>
+        </div>
       </div>
+
+      <div class="tool-right-col parties-section">
+        <div class="parties-header">
+          <div class="parties-header-label" id="totalSeatsHeader">15 Parties · 624 Total Seats</div>
+          <button class="reset-btn" onclick="resetAll()">↺ Reset</button>
+        </div>
+        
+        <div class="tags-row" id="filterList" style="padding: 10px 16px; border-bottom: 1px solid var(--line-strong); border-top: none; margin-top: 0;"></div>
+        
+        <div id="partyList"></div>
+      </div>
+      
     </div>
 
-    <div class="topic-sidebar">
-      
-      <div class="sidebar-header">
-        <div class="sidebar-header-top">
-          <span>Factions & Parties</span>
-          <span id="total-seat-counter" style="color:var(--ink);">0 / 624 Seats</span>
-        </div>
-        <div class="sidebar-header-bottom">
-          <span>Total Assembly Capacity</span>
-          <input type="text" inputmode="numeric" pattern="[0-9]*" id="input-max-seats" value="624">
+    <div class="article-wrapper" style="padding-top: 0;">
+      <div class="tags-row">
+        <span class="tag">Parliament</span>
+        <span class="tag">Nigeria</span>
+        <span class="tag">2058 Elections</span>
+        <span class="tag">Domestic Politics</span>
+      </div>
+    </div>
+  </article>
+
+  <div class="container">
+    <div class="related-section">
+      <div class="related-title">More Stories</div>
+
+      <div class="related-card">
+        <div class="related-info">
+          <div class="related-section-tag">Economy</div>
+          <h3 class="related-headline">Solid Earth Minerals Posts Record Revenue on Battery Demand</h3>
+          <div class="related-time">2 hours ago</div>
         </div>
       </div>
-      
-      <div class="party-editor-list" id="party-editor-list">
-        </div>
 
-      <button class="add-party-btn" id="btn-add-party">+ Add New Party</button>
+      <div class="related-card">
+        <div class="related-info">
+          <div class="related-section-tag">Politics</div>
+          <h3 class="related-headline">The Super Greens/Alliance '58 Undergoes Rebranding Following a Change in Leadership</h3>
+          <div class="related-time">5 hours ago</div>
+        </div>
+      </div>
+
+      <div class="related-card">
+        <div class="related-info">
+          <div class="related-section-tag">Lagos</div>
+          <h3 class="related-headline">Lekki Free Zone Attracts ₦400bn in Manufacturing Pledges This Quarter</h3>
+          <div class="related-time">Yesterday</div>
+        </div>
+      </div>
     </div>
   </div>
-
-  <div class="section-label">
-    <span class="section-label-text">More Interactive Politics</span>
-    <span class="section-label-line"></span>
-  </div>
-
-  <div class="card-grid">
-    <a href="article-placeholder.html" class="card article-link">
-      <div class="card-thumb">
-        <img src="assets/img/district-by-district.webp" alt="Thumbnail">
-        <span class="card-cat">Elections</span>
-      </div>
-      <p class="card-hl">Explore the district-by-district breakdown of the assembly vote</p>
-      <span class="card-time" data-datetime="2026-04-07T10:00:00Z">1 day ago</span>
-    </a>
-
-    <a href="article-placeholder.html" class="card article-link">
-      <div class="card-thumb">
-        <img src="assets/img/constitutional-threshold.webp" alt="Thumbnail">
-        <span class="card-cat">Analysis</span>
-      </div>
-      <p class="card-hl">How the constitutional threshold impacts progressive momentum</p>
-      <span class="card-time" data-datetime="2026-04-06T10:00:00Z">2 days ago</span>
-    </a>
-
-    <a href="article-placeholder.html" class="card article-link">
-      <div class="card-thumb">
-        <img src="assets/img/tax-brackets.webp" alt="Thumbnail">
-        <span class="card-cat">Economy</span>
-      </div>
-      <p class="card-hl">Simulate the proposed progressive tax brackets</p>
-      <span class="card-time" data-datetime="2026-04-04T10:00:00Z">4 days ago</span>
-    </a>
-
-    <a href="article-placeholder.html" class="card article-link">
-      <div class="card-thumb">
-        <img src="assets/img/evolving-new-makoko.webp" alt="Thumbnail">
-        <span class="card-cat">Lagos</span>
-      </div>
-      <p class="card-hl">Map: The evolving infrastructure of New Makoko</p>
-      <span class="card-time" data-datetime="2026-04-01T10:00:00Z">1 week ago</span>
-    </a>
-  </div>
-
 </main>
 
-<div id="footer-placeholder"></div>
-
-<script>
-// Base Application State
-let maxSeats = 624;
-
-// Default array with the EXACT requested order and colors
-let parties = [
-  { name: "Salam!", seats: 121, color: "#55e67b", inCoalition: false },
-  { name: "ABPL", seats: 91, color: "#2563eb", inCoalition: true },
-  { name: "Southern Renewal Party", seats: 84, color: "#eab308", inCoalition: false },
-  { name: "Group of the People", seats: 83, color: "#093314", inCoalition: false },
-  { name: "NDF", seats: 56, color: "#08992e", inCoalition: false },
-  { name: "FRILN", seats: 48, color: "#f59e0b", inCoalition: false },
-  { name: "New African Alliance", seats: 36, color: "#3ae0d8", inCoalition: true },
-  { name: "Naija Patriotic Army", seats: 29, color: "#000000", inCoalition: false },
-  { name: "Neo Omu Aro", seats: 12, color: "#450b0b", inCoalition: false },
-  { name: "MOTTAINAI", seats: 15, color: "#22c55e", inCoalition: true },
-  { name: "GLAND", seats: 13, color: "#a054c7", inCoalition: true },
-  { name: "FFA", seats: 21, color: "#e6e285", inCoalition: false },
-  { name: "People's Dem. Alliance", seats: 11, color: "#fc0f0f", inCoalition: true },
-  { name: "ISPN", seats: 4, color: "#d2ffc7", inCoalition: true }
-];
-
-// Re-renders ONLY the visual chart and status text (protects input cursors)
-function updateChart() {
-  const assignedSeats = parties.reduce((sum, p) => sum + parseInt(p.seats || 0), 0);
-  const unassignedSeats = Math.max(0, maxSeats - assignedSeats);
-  const chartTotal = Math.max(maxSeats, assignedSeats);
-  
-  const govSeats = parties.filter(p => p.inCoalition).reduce((sum, p) => sum + parseInt(p.seats || 0), 0);
-  const majorityNeeded = Math.floor(maxSeats / 2) + 1;
-  const hasMajority = govSeats >= majorityNeeded;
-
-  // 1. RENDER SVG HEMICYCLE DOTS
-  const svg = document.getElementById('parliament-svg');
-  svg.innerHTML = '';
-  
-  const cx = 200;
-  const cy = 200;
-  const r0 = 60;  
-  const r1 = 180; 
-
-  if (chartTotal > 0) {
-    const renderParties = [...parties];
-    
-    if (unassignedSeats > 0) {
-      renderParties.push({ name: "Unassigned", seats: unassignedSeats, color: "rgba(255,255,255,0.15)" });
-    }
-
-    let rows = Math.max(3, Math.ceil(Math.sqrt(chartTotal / 3)));
-    if (chartTotal > 800) rows = Math.ceil(Math.sqrt(chartTotal / 4)); 
-    
-    let rowRadii = [];
-    let totalArc = 0;
-    for(let i=0; i<rows; i++) {
-        let r = r0 + (i * (r1 - r0) / Math.max(1, rows - 1));
-        rowRadii.push(r);
-        totalArc += Math.PI * r;
-    }
-    
-    let seatsRemaining = chartTotal;
-    let seatsPerRow = rowRadii.map((r, i) => {
-        if (i === rows - 1) return seatsRemaining;
-        let seats = Math.round(chartTotal * (Math.PI * r) / totalArc);
-        if (seats > seatsRemaining) seats = seatsRemaining;
-        seatsRemaining -= seats;
-        return seats;
-    });
-    
-    let positions = [];
-    seatsPerRow.forEach((seats, rowIndex) => {
-        let r = rowRadii[rowIndex];
-        for(let i=0; i<seats; i++) {
-            let angle = seats === 1 ? Math.PI / 2 : Math.PI - (i / (seats - 1)) * Math.PI;
-            positions.push({
-                x: cx + r * Math.cos(angle),
-                y: cy - r * Math.sin(angle),
-                angle: angle
-            });
-        }
-    });
-    
-    positions.sort((a, b) => b.angle - a.angle);
-    
-    const maxDotRadius = ((r1 - r0) / rows) / 2 * 0.8; 
-    const dotRadius = Math.min(maxDotRadius, (Math.PI * r1) / seatsPerRow[rows-1] / 2 * 0.8);
-
-    let dotIndex = 0;
-    renderParties.forEach(party => {
-      const seats = parseInt(party.seats || 0);
-      for(let i=0; i<seats; i++) {
-          if(dotIndex >= positions.length) break;
-          const pos = positions[dotIndex];
-          
-          const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-          circle.setAttribute('cx', pos.x);
-          circle.setAttribute('cy', pos.y);
-          circle.setAttribute('r', dotRadius);
-          
-          if (party.name === "Unassigned") {
-            circle.setAttribute('fill', 'none');
-            circle.setAttribute('stroke', party.color);
-            circle.setAttribute('stroke-width', Math.max(1, dotRadius * 0.3));
-          } else {
-            circle.setAttribute('fill', party.color);
-          }
-          
-          svg.appendChild(circle);
-          dotIndex++;
-      }
-    });
-
-    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-    line.setAttribute('x1', cx);
-    line.setAttribute('y1', cy - r0 + 10);
-    line.setAttribute('x2', cx);
-    line.setAttribute('y2', cy - r1 - 10);
-    line.setAttribute('stroke', 'var(--line-strong)');
-    line.setAttribute('stroke-width', '2');
-    line.setAttribute('stroke-dasharray', '4,4');
-    svg.appendChild(line);
-  }
-
-  // 2. RENDER STATUS PANEL
-  let counterColor = assignedSeats > maxSeats ? "var(--red)" : "var(--ink)";
-  document.getElementById('total-seat-counter').innerHTML = `<span style="color:${counterColor}">${assignedSeats}</span> / ${maxSeats} Seats`;
-  
-  let statusText = "";
-  let statusClass = "";
-  if (assignedSeats > maxSeats) {
-    statusText = "OVER CAPACITY";
-    statusClass = "majority-error";
-  } else if (hasMajority) {
-    statusText = "MAJORITY";
-    statusClass = "majority-yes";
-  } else {
-    statusText = "MINORITY";
-    statusClass = "majority-no";
-  }
-
-  const statusHtml = `
-    <div class="status-stat">
-      <span class="status-label">Gov. Seats</span>
-      <span class="status-value">${govSeats}</span>
-    </div>
-    <div class="status-stat" style="text-align: right;">
-      <span class="status-label">Status</span>
-      <span class="status-majority-text ${statusClass}">
-        ${maxSeats === 0 ? 'NO DATA' : statusText}
-      </span>
-      <span style="font-family:'IBM Plex Mono', monospace; font-size:9px; color:var(--muted);">
-        ${majorityNeeded} needed
-      </span>
-    </div>
-  `;
-  document.getElementById('status-panel').innerHTML = statusHtml;
-}
-
-// Rebuilds the DOM Sidebar and attaches listeners (used for structural changes)
-function renderSidebar() {
-  const list = document.getElementById('party-editor-list');
-  list.innerHTML = '';
-
-  parties.forEach((party, index) => {
-    const row = document.createElement('div');
-    row.className = 'party-row';
-    row.dataset.index = index;
-    row.innerHTML = `
-      <div class="party-row-top">
-        <div class="drag-handle" title="Drag to reorder">⋮</div>
-        <input type="color" class="party-color" data-index="${index}" value="${party.color}">
-        <input type="text" class="party-name" data-index="${index}" value="${party.name}" placeholder="Party Name">
-        <button class="party-remove" data-index="${index}" aria-label="Remove Party">×</button>
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-top">
+      <div class="footer-logo">
+        <img src="assets/img/logo-faded.png" alt="Forward" style="height: 36px; opacity: 0.3;">
       </div>
-      <div class="party-row-bottom">
-        <label class="party-seats-wrap">Seats: 
-          <input type="text" inputmode="numeric" pattern="[0-9]*" class="party-seats" data-index="${index}" value="${party.seats}">
-        </label>
-        <label class="party-coalition-wrap">
-          <input type="checkbox" class="party-coalition" data-index="${index}" ${party.inCoalition ? 'checked' : ''}>
-          In Government
-        </label>
-      </div>
-    `;
-    list.appendChild(row);
-  });
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-copyright">© 2058 Forward! Media Group · Lagos · Abuja · New Makoko · Port Harcourt<br>The Voice of the People · Est. 2057 · All rights reserved.</div>
+  </div>
+</footer>
 
-  attachEditorListeners();
-}
-
-function fullRender() {
-  renderSidebar();
-  updateChart();
-}
-
-// Attach all interactive events
-function attachEditorListeners() {
-  document.querySelectorAll('.party-name').forEach(input => {
-    input.addEventListener('input', (e) => {
-      parties[e.target.dataset.index].name = e.target.value;
-    });
-  });
-
-  document.querySelectorAll('.party-color').forEach(input => {
-    input.addEventListener('input', (e) => {
-      parties[e.target.dataset.index].color = e.target.value;
-      updateChart(); 
-    });
-  });
-
-  document.querySelectorAll('.party-seats').forEach(input => {
-    
-    input.addEventListener('focus', function() {
-       this.select();
-    });
-
-    input.addEventListener('keydown', (e) => {
-        if ([46, 8, 9, 27, 13, 37, 38, 39, 40].indexOf(e.keyCode) !== -1 ||
-            (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
-            (e.keyCode === 67 && (e.ctrlKey === true || e.metaKey === true)) ||
-            (e.keyCode === 86 && (e.ctrlKey === true || e.metaKey === true)) ||
-            (e.keyCode === 88 && (e.ctrlKey === true || e.metaKey === true)) ||
-            (e.keyCode >= 35 && e.keyCode <= 39)) {
-                 return;
-        }
-        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-            e.preventDefault();
-        }
-    });
-
-    input.addEventListener('input', (e) => {
-      const pIndex = parseInt(e.target.dataset.index);
-      
-      let rawVal = e.target.value.replace(/\D/g, ''); 
-      let cursorPosition = e.target.selectionStart;
-      
-      if (rawVal === "") {
-        e.target.value = "";
-        parties[pIndex].seats = 0;
-        updateChart();
-        return;
-      }
-
-      let newSeats = parseInt(rawVal, 10);
-
-      let otherSeatsTotal = 0;
-      parties.forEach((p, idx) => {
-        if (idx !== pIndex) otherSeatsTotal += parseInt(p.seats || 0);
-      });
-
-      const maxAllowed = maxSeats - otherSeatsTotal;
-      let clamped = false;
-      if (newSeats > maxAllowed) {
-        newSeats = maxAllowed;
-        clamped = true;
-      }
-      
-      let newValString = newSeats.toString();
-
-      if (e.target.value !== newValString) {
-        e.target.value = newValString;
-        
-        if (clamped) {
-          e.target.setSelectionRange(newValString.length, newValString.length);
-        } else {
-          let offset = rawVal.length - newValString.length;
-          let newCursor = Math.max(0, cursorPosition - offset);
-          e.target.setSelectionRange(newCursor, newCursor);
-        }
-      }
-
-      parties[pIndex].seats = newSeats;
-      updateChart();
-    });
-
-    input.addEventListener('blur', (e) => {
-      const pIndex = parseInt(e.target.dataset.index);
-      e.target.value = parties[pIndex].seats; 
-      updateChart();
-    });
-  });
-
-  document.querySelectorAll('.party-coalition').forEach(input => {
-    input.addEventListener('change', (e) => {
-      parties[e.target.dataset.index].inCoalition = e.target.checked;
-      updateChart(); 
-    });
-  });
-
-  document.querySelectorAll('.party-remove').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      parties.splice(e.target.dataset.index, 1);
-      fullRender(); 
-    });
-  });
-
-  let draggedIndex = null;
-
-  document.querySelectorAll('.drag-handle').forEach(handle => {
-    handle.addEventListener('mouseenter', function() {
-      this.closest('.party-row').setAttribute('draggable', 'true');
-    });
-    handle.addEventListener('mouseleave', function() {
-      this.closest('.party-row').removeAttribute('draggable');
-    });
-  });
-
-  document.querySelectorAll('.party-row').forEach(row => {
-    row.addEventListener('dragstart', function(e) {
-      draggedIndex = parseInt(this.dataset.index);
-      e.dataTransfer.effectAllowed = 'move';
-      setTimeout(() => this.classList.add('dragging'), 0);
-    });
-
-    row.addEventListener('dragend', function() {
-      this.classList.remove('dragging');
-      document.querySelectorAll('.party-row').forEach(r => r.classList.remove('drag-over'));
-      this.removeAttribute('draggable');
-    });
-
-    row.addEventListener('dragover', function(e) {
-      e.preventDefault(); 
-      this.classList.add('drag-over');
-    });
-
-    row.addEventListener('dragleave', function() {
-      this.classList.remove('drag-over');
-    });
-
-    row.addEventListener('drop', function(e) {
-      e.preventDefault();
-      this.classList.remove('drag-over');
-      const targetIndex = parseInt(this.dataset.index);
-      
-      if (draggedIndex !== null && draggedIndex !== targetIndex) {
-        const movedItem = parties.splice(draggedIndex, 1)[0];
-        parties.splice(targetIndex, 0, movedItem);
-        fullRender();
-      }
-    });
-  });
-}
-
-const maxSeatsInput = document.getElementById('input-max-seats');
-
-maxSeatsInput.addEventListener('focus', function() {
-   this.select();
-});
-
-maxSeatsInput.addEventListener('keydown', (e) => {
-  if ([46, 8, 9, 27, 13, 37, 38, 39, 40].indexOf(e.keyCode) !== -1 ||
-      (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
-      (e.keyCode === 67 && (e.ctrlKey === true || e.metaKey === true)) ||
-      (e.keyCode === 86 && (e.ctrlKey === true || e.metaKey === true)) ||
-      (e.keyCode === 88 && (e.ctrlKey === true || e.metaKey === true)) ||
-      (e.keyCode >= 35 && e.keyCode <= 39)) {
-           return;
-  }
-  if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-      e.preventDefault();
-  }
-});
-
-maxSeatsInput.addEventListener('input', (e) => {
-  let rawVal = e.target.value.replace(/\D/g, '');
-  let cursorPosition = e.target.selectionStart;
-
-  if (rawVal === "") {
-    e.target.value = "";
-    return; 
-  }
-
-  let newMax = parseInt(rawVal, 10);
-  if (newMax < 1) newMax = 1;
-
-  const assignedSeats = parties.reduce((sum, p) => sum + parseInt(p.seats || 0), 0);
-  let clamped = false;
-  
-  if (newMax < assignedSeats) {
-    newMax = assignedSeats;
-    clamped = true;
-  }
-
-  let newValString = newMax.toString();
-  if (e.target.value !== newValString) {
-    e.target.value = newValString;
-    if(clamped){
-      e.target.setSelectionRange(newValString.length, newValString.length);
-    } else {
-      let offset = rawVal.length - newValString.length;
-      let newCursor = Math.max(0, cursorPosition - offset);
-      e.target.setSelectionRange(newCursor, newCursor);
-    }
-  }
-
-  maxSeats = newMax;
-  updateChart();
-});
-
-maxSeatsInput.addEventListener('blur', (e) => {
-  if (e.target.value === "") {
-     const assignedSeats = parties.reduce((sum, p) => sum + parseInt(p.seats || 0), 0);
-     maxSeats = Math.max(1, assignedSeats);
-     e.target.value = maxSeats;
-     updateChart();
-  }
-});
-
-document.getElementById('btn-add-party').addEventListener('click', () => {
-  const assignedSeats = parties.reduce((sum, p) => sum + parseInt(p.seats || 0), 0);
-  const remainingSeats = maxSeats - assignedSeats;
-  const newPartySeats = Math.min(10, remainingSeats); 
-  
-  parties.push({ name: "New Faction", seats: newPartySeats, color: "#ffffff", inCoalition: false });
-  fullRender();
-});
-
-fullRender();
-</script>
-
-    <script src="assets/js/aqi-data.js"></script>
-    <script src="assets/js/aqi-ticker.js"></script>
-    <script src="assets/js/news-metadata.js"></script>
-    <script src="assets/js/relative-time.js"></script>
-    <script src="assets/js/components-loader.js"></script>
+<script src="interactive.js"></script>
 </body>
 </html>
