@@ -46,7 +46,7 @@
 
 .header-image-container { margin-top: 16px; }
 
-.title-only .header-image-container { display: none; }
+.title-only .header-image-container { display: none !important; }
 
 @media (min-width: 768px) {
     .title-only {
