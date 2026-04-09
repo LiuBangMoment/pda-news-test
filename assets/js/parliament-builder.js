@@ -2,20 +2,20 @@ let maxSeats = 644;
 let activeDraggedParty = null;
 
 let parties = [
-  { name: "Salam!", seats: 121, color: "#55e67b", inCoalition: false },
-  { name: "ABPL", seats: 91, color: "#2563eb", inCoalition: true },
-  { name: "Southern Renewal Party", seats: 84, color: "#eab308", inCoalition: false },
-  { name: "Group of the People", seats: 83, color: "#093314", inCoalition: false },
-  { name: "NDF", seats: 56, color: "#08992e", inCoalition: false },
-  { name: "FRILN", seats: 48, color: "#f59e0b", inCoalition: false },
-  { name: "New African Alliance", seats: 36, color: "#3ae0d8", inCoalition: true },
-  { name: "Naija Patriotic Army", seats: 29, color: "#000000", inCoalition: false },
-  { name: "Neo Omu Aro", seats: 12, color: "#450b0b", inCoalition: false },
-  { name: "MOTTAINAI", seats: 15, color: "#22c55e", inCoalition: true },
-  { name: "GLAND", seats: 13, color: "#a054c7", inCoalition: true },
-  { name: "FFA", seats: 21, color: "#e6e285", inCoalition: false },
-  { name: "People's Dem. Alliance", seats: 11, color: "#fc0f0f", inCoalition: true },
-  { name: "ISPN", seats: 4, color: "#d2ffc7", inCoalition: true }
+  { name: "ISPN",                    seats: 4,   color: "#d2ffc7", inCoalition: true },
+  { name: "People's Dem. Alliance",  seats: 11,  color: "#fc0f0f", inCoalition: true },
+  { name: "MOTTAINAI",               seats: 15,  color: "#22c55e", inCoalition: true },
+  { name: "New African Alliance",    seats: 36,  color: "#3ae0d8", inCoalition: true },
+  { name: "GLAND",                   seats: 13,  color: "#a054c7", inCoalition: true },
+  { name: "FRILN",                   seats: 48,  color: "#f59e0b", inCoalition: false },
+  { name: "ABPL",                    seats: 91,  color: "#2563eb", inCoalition: true },
+  { name: "NDF",                     seats: 56,  color: "#08992e", inCoalition: false },
+  { name: "Southern Renewal Party",  seats: 84,  color: "#eab308", inCoalition: false },
+  { name: "Naija Patriotic Army",    seats: 29,  color: "#000000", inCoalition: false },
+  { name: "Salam!",                  seats: 121, color: "#55e67b", inCoalition: false },
+  { name: "Neo Omu Aro",             seats: 12,  color: "#450b0b", inCoalition: false },
+  { name: "FFA",                     seats: 21,  color: "#e6e285", inCoalition: false },
+  { name: "Group of the People",     seats: 83,  color: "#093314", inCoalition: false }
 ];
 
 function updateChart() {
@@ -25,7 +25,10 @@ function updateChart() {
   
   const govSeats = parties.filter(p => p.inCoalition).reduce((sum, p) => sum + parseInt(p.seats || 0), 0);
   const majorityNeeded = Math.floor(maxSeats / 2) + 1;
+  const superMajorityNeeded = Math.floor((maxSeats * 2) / 3) + 1;
+  
   const hasMajority = govSeats >= majorityNeeded;
+  const hasSuperMajority = govSeats >= superMajorityNeeded;
 
   const svg = document.getElementById('parliament-svg');
   if (!svg) return;
@@ -183,8 +186,9 @@ function updateChart() {
     totalCounter.innerHTML = `<span style="color:${counterColor}">${assignedSeats}</span> / ${maxSeats} Seats`;
   }
   
-  let statusText = assignedSeats > maxSeats ? "OVER CAPACITY" : (hasMajority ? "MAJORITY" : "MINORITY");
-  let statusClass = assignedSeats > maxSeats ? "majority-error" : (hasMajority ? "majority-yes" : "majority-no");
+  let statusText = assignedSeats > maxSeats ? "OVER CAPACITY" : (hasSuperMajority ? "SUPERMAJORITY" : (hasMajority ? "MAJORITY" : "MINORITY"));
+  let statusClass = assignedSeats > maxSeats ? "majority-error" : (hasSuperMajority ? "majority-super" : (hasMajority ? "majority-yes" : "majority-no"));
+  let neededText = hasSuperMajority ? `${superMajorityNeeded} needed` : `${majorityNeeded} needed`;
 
   const statusPanel = document.getElementById('status-panel');
   if (statusPanel) {
@@ -193,7 +197,7 @@ function updateChart() {
       <div class="status-stat" style="text-align: right;">
         <span class="status-label">Status</span>
         <span class="status-majority-text ${statusClass}">${maxSeats === 0 ? 'NO DATA' : statusText}</span>
-        <span style="font-family:'IBM Plex Mono', monospace; font-size:9px; color:var(--muted);">${majorityNeeded} needed</span>
+        <span style="font-family:'IBM Plex Mono', monospace; font-size:9px; color:var(--muted);">${neededText}</span>
       </div>`;
   }
 }
