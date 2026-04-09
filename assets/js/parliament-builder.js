@@ -219,9 +219,12 @@ function renderSidebar() {
         <button class="party-remove" data-index="${index}" aria-label="Remove Party">×</button>
       </div>
       <div class="party-row-bottom">
-        <label class="party-seats-wrap">Seats: 
-          <input type="number" min="0" max="${maxSeats}" class="party-seats" data-index="${index}" value="${party.seats}">
-        </label>
+        <div class="party-seats-controls">
+          <span style="margin-right: 6px;">Seats:</span>
+          <button class="seat-btn minus-btn" data-index="${index}">−</button>
+          <input type="text" inputmode="numeric" pattern="[0-9]*" class="party-seats" data-index="${index}" value="${party.seats}">
+          <button class="seat-btn plus-btn" data-index="${index}">+</button>
+        </div>
         <label class="party-coalition-wrap">
           <input type="checkbox" class="party-coalition" data-index="${index}" ${party.inCoalition ? 'checked' : ''}>
           In Government
@@ -253,6 +256,40 @@ function attachEditorListeners() {
     });
   });
 
+  // Obsługa przycisku MINUS
+  document.querySelectorAll('.minus-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const pIndex = parseInt(e.target.dataset.index);
+      let currentSeats = parseInt(parties[pIndex].seats || 0);
+      if (currentSeats > 0) {
+        parties[pIndex].seats = currentSeats - 1;
+        document.querySelector(`.party-seats[data-index="${pIndex}"]`).value = parties[pIndex].seats;
+        updateChart();
+      }
+    });
+  });
+
+  // Obsługa przycisku PLUS
+  document.querySelectorAll('.plus-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const pIndex = parseInt(e.target.dataset.index);
+      let currentSeats = parseInt(parties[pIndex].seats || 0);
+      
+      let otherSeatsTotal = 0;
+      parties.forEach((p, idx) => {
+        if (idx !== pIndex) otherSeatsTotal += parseInt(p.seats || 0);
+      });
+      const maxAllowed = maxSeats - otherSeatsTotal;
+
+      if (currentSeats < maxAllowed) {
+        parties[pIndex].seats = currentSeats + 1;
+        document.querySelector(`.party-seats[data-index="${pIndex}"]`).value = parties[pIndex].seats;
+        updateChart();
+      }
+    });
+  });
+
+  // Ręczne wpisywanie wartości z klawiatury
   document.querySelectorAll('.party-seats').forEach(input => {
     input.addEventListener('focus', function() { this.select(); });
 
