@@ -365,9 +365,12 @@
   display: flex;
   gap: 12px;
   width: 100%;
+  grid-template-columns: 6fr 3fr;
 }
 
-.add-party-btn, .unselect-party-btn {
+.add-party-btn, 
+.unselect-party-btn {
+  margin-left: 1fr;
   flex: 1;
   padding: 12px;
   background: transparent;
