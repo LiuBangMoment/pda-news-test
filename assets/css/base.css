@@ -1,0 +1,61 @@
+/* ==========================================================================
+   BASE & GLOBAL STYLES
+   ========================================================================== */
+
+:root {
+  --blue: #1a4d8f;
+  --red: #cc1f1f;
+  --accent: #4a9eff;
+  --bg: #0e1117;
+  --bg-panel: #0e1117; 
+  --bg-card: #0e1117;  
+  --ink: #dde4ed;
+  --mid: #9baec2;    
+  --muted: #7890a8;  
+  --line: rgba(255,255,255,0.06);
+  --line-strong: rgba(255,255,255,0.1);
+  --padding-x: 16px; 
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Space Grotesk', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.site-main {
+  display: block;
+}
+
+/* Global Link Reset */
+.article-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Global Content Aligner */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (min-width: 768px) {
+  :root { --padding-x: 40px; }
+  
+  .container {
+    padding: 0;
+  }
+}

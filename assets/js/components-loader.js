@@ -60,6 +60,47 @@ function setActiveNav() {
     });
 }
 
+function populateRelatedStories() {
+    const container = document.querySelector('.related-section');
+    if (!container || typeof ARTICLES === 'undefined') return;
+
+    // Get current filename to exclude it
+    const currentPath = window.location.pathname;
+    const currentFile = currentPath.split('/').pop() || 'index.html';
+
+    // Get 4 random articles that aren't the current one
+    const others = ARTICLES.filter(a => a.url !== currentFile)
+                           .sort(() => 0.5 - Math.random())
+                           .slice(0, 4);
+
+    if (others.length === 0) return;
+
+    let html = `
+        <div class="section-label">
+            <span class="section-label-text">More Stories</span>
+            <span class="section-label-line"></span>
+        </div>
+        <div class="card-grid">
+    `;
+    
+    others.forEach(art => {
+        const style = art.imgStyle ? `style="${art.imgStyle}"` : '';
+        html += `
+            <a href="${art.url}" class="card article-link">
+              <div class="card-thumb">
+                <img src="${art.img}" alt="${art.title}" ${style}>
+                <span class="card-cat">${art.category}</span>
+              </div>
+              <p class="card-hl">${art.title}</p>
+              <span class="card-time" data-datetime="${art.date}"></span>
+            </a>
+        `;
+    });
+
+    html += '</div>';
+    container.innerHTML = html;
+}
+
 // Re-initialize scripts that depend on the injected HTML
 function initInjectedScripts() {
     // 1. Initialize AQI components (Ticker and Panel)
@@ -89,6 +130,9 @@ function initInjectedScripts() {
 
     // 3. Trigger relative time update
     if (typeof updateRelativeTimes === 'function') updateRelativeTimes();
+
+    // 4. Populate Related Stories
+    populateRelatedStories();
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
