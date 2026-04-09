@@ -1,4 +1,4 @@
-let maxSeats = 644;
+let maxSeats = 624;
 let activeDraggedParty = null;
 
 let parties = [
