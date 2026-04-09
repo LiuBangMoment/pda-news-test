@@ -1174,7 +1174,6 @@ body {
   .article-body p:first-child::first-letter { font-size: 68px; margin-top: 8px; }
   .pull-quote-text { font-size: 26px; }
   .article-h2 { font-size: 32px; margin-bottom: 16px; }
-  .fw-list__dot { margin-top: 12px; }
   
   /* Shared Components */
   .card-grid { grid-template-columns: repeat(4, 1fr); }
