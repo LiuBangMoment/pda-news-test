@@ -49,8 +49,7 @@
 .title-only .header-image-container { display: none !important; }
 
 .article-main-img {
-  width: calc(100% + (var(--padding-x) * 2));
-  margin-left: calc(var(--padding-x) * -1);
+  width: 100%;
   height: auto;
   display: block;
   background: #13181f;
