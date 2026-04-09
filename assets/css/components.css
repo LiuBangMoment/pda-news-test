@@ -762,6 +762,10 @@
     padding: 24px 32px 16px; 
   }
 
+  .masthead-top {
+     justify-content: left;
+  }
+
   .nav-inner {
     padding: 0 16px;
     width: 100%; 
