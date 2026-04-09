@@ -408,6 +408,7 @@ function attachEditorListeners() {
 document.addEventListener('DOMContentLoaded', () => {
   const maxSeatsInput = document.getElementById('input-max-seats');
   const addPartyBtn = document.getElementById('btn-add-party');
+  const unselectAllBtn = document.getElementById('btn-unselect-all');
 
   if (maxSeatsInput) {
     maxSeatsInput.value = maxSeats;
@@ -421,6 +422,13 @@ document.addEventListener('DOMContentLoaded', () => {
       const newPartySeats = Math.min(10, remainingSeats); 
       
       parties.push({ name: "New Faction", seats: newPartySeats, color: "#ffffff", inCoalition: false });
+      fullRender();
+    });
+  }
+
+  if (unselectAllBtn) {
+    unselectAllBtn.addEventListener('click', () => {
+      parties.forEach(p => p.inCoalition = false);
       fullRender();
     });
   }
