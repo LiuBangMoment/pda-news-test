@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>[TOPIC NAME] News — Forward!</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Your Title</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Space+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="assets/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
 
@@ -202,61 +202,8 @@
   </div>
 </footer>
 
-<script>
-// AQI data for major Nigerian cities
-const aqiData = [
-  { city: "Lagos",         aqi: 142, status: "Unhealthy",  color: "#e65100" },
-  { city: "Abuja",         aqi:  68, status: "Moderate",   color: "#f4b400" },
-  { city: "New Makoko",    aqi:  31, status: "Good",       color: "#00b050" },
-  { city: "Kano",          aqi: 188, status: "Unhealthy",  color: "#e65100" },
-  { city: "Ibadan",        aqi:  95, status: "Moderate",   color: "#f4b400" },
-  { city: "Port Harcourt", aqi: 211, status: "V.Unhealthy",color: "#b71c1c" },
-  { city: "Enugu",         aqi:  55, status: "Moderate",   color: "#f4b400" },
-  { city: "Kaduna",        aqi: 121, status: "Unhealthy",  color: "#e65100" },
-  { city: "Benin City",    aqi:  44, status: "Good",       color: "#00b050" },
-  { city: "Maiduguri",     aqi: 163, status: "Unhealthy",  color: "#e65100" },
-];
-
-// Build AQI ticker
-const scroll = document.getElementById('aqiScroll');
-const buildTicker = () => {
-  let html = '';
-  for (let i = 0; i < 4; i++) {
-    aqiData.forEach(d => {
-      html += `<span class="aqi-item">
-        <span class="aqi-dot" style="background:${d.color}"></span>
-        <span class="aqi-city">${d.city}</span>
-        <span class="aqi-val" style="color:${d.color}">${d.aqi}</span>
-      </span>`;
-    });
-  }
-  scroll.innerHTML = html;
-};
-if (scroll) buildTicker();
-
-// Click/touch drag scrolling for nav strip
-const nav = document.querySelector('.nav-strip');
-let isDown = false, startX, scrollLeft;
-
-if (nav) {
-  nav.addEventListener('mousedown', e => {
-    isDown = true;
-    nav.style.cursor = 'grabbing';
-    startX = e.pageX - nav.offsetLeft;
-    scrollLeft = nav.scrollLeft;
-  });
-  nav.addEventListener('mouseleave', () => { isDown = false; nav.style.cursor = ''; });
-  nav.addEventListener('mouseup', () => { isDown = false; nav.style.cursor = ''; });
-  nav.addEventListener('mousemove', e => {
-    if (!isDown) return;
-    e.preventDefault();
-    const x = e.pageX - nav.offsetLeft;
-    nav.scrollLeft = scrollLeft - (x - startX);
-  });
-}
-</script>
-
-    <script src="assets/js/news-metadata.js"></script>
-    <script src="assets/js/relative-time.js"></script>
+<body>
+<script src="assets/css/scripts.js"></script>
 </body>
+</html>
 </html>
