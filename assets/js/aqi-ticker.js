@@ -1,16 +1,3 @@
-const aqiData = [
-  { city: "Lagos",         aqi: 142, status: "Unhealthy",  color: "#e65100" },
-  { city: "Abuja",         aqi:  68, status: "Moderate",   color: "#f4b400" },
-  { city: "New Makoko",    aqi:  31, status: "Good",       color: "#00b050" },
-  { city: "Kano",          aqi: 188, status: "Unhealthy",  color: "#e65100" },
-  { city: "Ibadan",        aqi:  95, status: "Moderate",   color: "#f4b400" },
-  { city: "Port Harcourt", aqi: 211, status: "V.Unhealthy",color: "#b71c1c" },
-  { city: "Enugu",         aqi:  55, status: "Moderate",   color: "#f4b400" },
-  { city: "Kaduna",        aqi: 121, status: "Unhealthy",  color: "#e65100" },
-  { city: "Benin City",    aqi:  44, status: "Good",       color: "#00b050" },
-  { city: "Maiduguri",     aqi: 163, status: "Unhealthy",  color: "#e65100" },
-];
-
 function initAQITicker() {
   const scroll = document.getElementById('aqiScroll');
   if (!scroll) return false;
@@ -63,11 +50,14 @@ window.initAQI = function() {
     let panelInitialized = false;
     
     const attempt = () => {
+        if (typeof aqiData === 'undefined') {
+            setTimeout(attempt, 100);
+            return;
+        }
+        
         if (!tickerInitialized) tickerInitialized = initAQITicker();
         if (!panelInitialized) panelInitialized = initAQIPanel();
         
-        // If both are found or we've tried enough, stop.
-        // On article pages, panel will never be found, so we just keep trying for ticker.
         if (tickerInitialized && (panelInitialized || !document.querySelector('.aqi-panel'))) {
             return; 
         }

@@ -1,27 +1,30 @@
 // Function to get the root path relative to the current file
 function getRootPath() {
-    const path = window.location.pathname;
-    const depth = (path.match(/\//g) || []).length - 1;
-    // On GitHub Pages, the first segment might be the repo name, so we check if it's there
-    // For local testing on a server, depth is usually correct.
-    return "../".repeat(Math.max(0, depth));
+    // Look for the script tag that loaded this file
+    const script = document.querySelector('script[src*="components-loader.js"]');
+    if (script) {
+        const src = script.getAttribute('src');
+        // If src is "assets/js/components-loader.js", root is ""
+        // If src is "../assets/js/components-loader.js", root is "../"
+        return src.replace('assets/js/components-loader.js', '');
+    }
+    return '';
 }
 
 async function loadComponent(id, file) {
     const el = document.getElementById(id);
     if (!el) return;
     try {
-        // We use root-relative fetching to ensure it works from subfolders
-        // For simplicity in this static setup, we'll try to determine the root
         const root = getRootPath();
         const response = await fetch(root + file);
         if (response.ok) {
             let html = await response.text();
             
-            // Fix paths in the loaded HTML to be relative to the root
+            // Fix relative paths in the loaded HTML (images/links) 
+            // to be correct relative to the current page
             if (root !== "") {
-                html = html.replace(/href="([^"h][^"]*)"/g, `href="${root}$1"`);
-                html = html.replace(/src="([^"h][^"]*)"/g, `src="${root}$1"`);
+                // This replaces paths like src="assets/..." with src="../assets/..."
+                html = html.replace(/(src|href)="(?!\/|http|https)([^"]+)"/g, `$1="${root}$2"`);
             }
             
             el.innerHTML = html;
@@ -80,12 +83,10 @@ function initInjectedScripts() {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-    const headerLoaded = await loadComponent('header-placeholder', 'components/header.html');
-    const footerLoaded = await loadComponent('footer-placeholder', 'components/footer.html');
+    // Sequence the loads to ensure DOM is ready
+    await loadComponent('header-placeholder', 'components/header.html');
+    await loadComponent('footer-placeholder', 'components/footer.html');
     
-    if (headerLoaded) {
-        setActiveNav();
-    }
-    
+    setActiveNav();
     initInjectedScripts();
 });
