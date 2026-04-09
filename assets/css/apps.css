@@ -19,7 +19,7 @@
 
 /* ── STATUS PANEL & AXIS ───────────────────────── */
 .status-panel {
-  margin-top: 16px; /* Zmniejszony margines z 48px na 16px */
+  margin-top: 16px;
   width: 100%;
   max-width: 800px;
   border-top: 1px solid var(--line-strong);
