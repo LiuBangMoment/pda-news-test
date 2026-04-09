@@ -426,6 +426,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // LOGIC FOR UNSELECT ALL
   if (unselectAllBtn) {
     unselectAllBtn.addEventListener('click', () => {
       parties.forEach(p => p.inCoalition = false);
