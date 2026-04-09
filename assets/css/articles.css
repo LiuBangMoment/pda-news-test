@@ -53,6 +53,7 @@
   margin-left: calc(var(--padding-x) * -1);
   height: auto;
   display: block;
+  background: #13181f;
 }
 
 .image-caption {
