@@ -14,6 +14,28 @@ const SECTION_CONFIG = {
 };
 
 const ARTICLES = [
+    {
+    id: "ffa-food-bill",
+    title: "The Price of Populism: why the FFA's 'Food Security' Bill threatens Nigeria's economy",
+    deck: "The Forgotten Farmer Alliance pushes a populist agenda to tax imported food, that threatens to unravel decades of WAFTA-driven growt. Inside the fierce committee debate that exposed the 'Food Security' bill as an economic hazard — and why Nigeria’s commitment to free trade will ultimately prevail.",
+    category: "Politics",
+    tags: ["Politics", "Agriculture", "National Assembly", "FFA", "Democracy"],
+    author: "Hadiza Usaini",
+    date: "2026-04-12T13:00:00Z",
+    url: "ffa-shitty-bill.html",
+    img: "assets/img/nigeria-north.webp"
+  },
+  {
+    id: "ambazonia",
+    title: "Defying the Silence: the People's Democratic Movement is born in New Makoko",
+    deck: "With the international community turning a blind eye to Yaoundé's abuses, Ambazonia's newly formed People's Democratic Movement is charting a radical, pragmatic, progressive path forward for the region.",
+    category: "World",
+    tags: ["Cameroon", "Politics", "Progressive", "PDA", "African Union", "Opposition", "Human Rights", "Ambazonia"],
+    author: "Hadiza Usaini",
+    date: "2026-04-11T13:00:00Z",
+    url: "ambazonia.html",
+    img: "assets/img/ambazonia.webp"
+  },
   {
     id: "ispn-disappearance",
     title: "The strange disappearance of ISPN politicians and their equally strange return",
