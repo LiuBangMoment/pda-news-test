@@ -21,7 +21,7 @@ const ARTICLES = [
     category: "Politics",
     tags: ["Politics", "Agriculture", "National Assembly", "FFA", "Democracy"],
     author: "Hadiza Usaini",
-    date: "2026-04-12T13:00:00Z",
+    date: "2026-04-11T23:00:00Z",
     url: "ffa-shitty-bill.html",
     img: "assets/img/nigeria-north.webp"
   },
@@ -32,7 +32,7 @@ const ARTICLES = [
     category: "World",
     tags: ["Cameroon", "Politics", "Progressive", "PDA", "African Union", "Opposition", "Human Rights", "Ambazonia"],
     author: "Hadiza Usaini",
-    date: "2026-04-11T13:00:00Z",
+    date: "2026-04-11T17:00:00Z",
     url: "ambazonia.html",
     img: "assets/img/ambazonia.webp"
   },
