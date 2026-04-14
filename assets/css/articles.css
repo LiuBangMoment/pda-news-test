@@ -52,7 +52,7 @@
   width: 100%;
   height: auto;
   display: block;
-  background: #13181f;
+  background: var(--bg-alt);
 }
 
 .image-caption {

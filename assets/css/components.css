@@ -194,7 +194,7 @@
   padding: 10px 14px;
   text-transform: uppercase;
   cursor: pointer;
-  transition: color 0.15s;
+  transition: color 0.15s, background 0.15s;
   border-right: 1px solid var(--line);
   display: block;
   text-decoration: none;
@@ -204,8 +204,16 @@
   border-left: 1px solid var(--line);
 }
 
-.nav-item.active { color: var(--ink); border-bottom: 2px solid var(--red); padding-bottom: 8px; }
-.nav-item:hover { color: var(--mid); }
+.nav-item.active { 
+  color: var(--ink); 
+  border-bottom: 2px solid var(--red); 
+  padding-bottom: 8px; 
+}
+
+.nav-item:hover { 
+  color: var(--ink); 
+  background: var(--bg-alt); 
+}
 
 .nav-search {
   padding: 0 16px;
@@ -300,7 +308,7 @@
 }
 
 .search-result-item:hover {
-  background: #13181f;
+  background: var(--bg-alt);
 }
 
 .search-result-hl {
@@ -334,7 +342,7 @@
 }
 
 .breaking:hover {
-  background: #13181f;
+  background: var(--bg-alt);
 }
 
 .breaking:hover .breaking-text {
@@ -387,7 +395,7 @@
 }
 
 .headliner:hover {
-  background: #13181f;
+  background: var(--bg-alt);
 }
 
 .headliner:hover .headliner-headline {
@@ -526,7 +534,7 @@ a.section-label-more:hover {
 }
 
 .card:hover { 
-  background: #13181f; 
+  background: var(--bg-alt); 
 }
 
 .card:hover .card-hl {
@@ -599,7 +607,7 @@ a.section-label-more:hover {
 }
 
 .opinion-strip:hover {
-  background: #13181f;
+  background: var(--bg-alt);
 }
 
 .opinion-strip:hover .opinion-quote {
@@ -681,7 +689,7 @@ a.section-label-more:hover {
 }
 
 .list-article:hover { 
-  background: #13181f; 
+  background: var(--bg-alt); 
 }
 
 .list-article:hover .list-hl {
@@ -781,7 +789,7 @@ a.section-label-more:hover {
 }
 
 .archive-item:hover {
-  background: #13181f;
+  background: var(--bg-alt);
 }
 
 .archive-date {
