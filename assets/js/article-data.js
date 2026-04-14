@@ -10,7 +10,12 @@
 const SECTION_CONFIG = {
   "index": { featuredId: "chad-pda-vs-chud-gop" }, // Homepage cover
   "Politics": { featuredId: "progressive-bloc" },
-  "Lagos": { featuredId: "pallas-cat" }
+  "Lagos": { featuredId: "pallas-cat" },
+  "topStories": [
+    "ispn-disappearance",
+    "chad-pda-vs-chud-gop",
+    "new-makoko-rents-high"
+  ]
 };
 
 const ARTICLES = [
@@ -53,6 +58,7 @@ const ARTICLES = [
     deck: "Despite a barrage of bigoted and unparliamentary attacks from the Group of the People, Usman Ma of the PDA outlined a unifying, forward-thinking economic agenda during his confirmation hearing.",
     category: "Politics",
     tags: ["Usman Ma", "PDA", "GOP", "Progressive", "National Assembly", "Domestic Economy"],
+    topStory: true,
     author: "Jideofor Chidea",
     date: "2026-04-08T11:00:00Z",
     url: "chad-pda-vs-chud-gop.html",

@@ -64,6 +64,35 @@ function getResponsiveImg(basePath, alt, className = "", style = "") {
                  ${style ? `style="${style}"` : ""}>`;
 }
 
+// Optimization: Shared Card Builder
+function renderArticleCard(art, root) {
+    const fullUrl = art.url.startsWith('http') ? art.url : root + art.url;
+    const imgHtml = getResponsiveImg(art.img, art.title, "", art.imgStyle);
+    return `
+        <a href="${fullUrl}" class="card article-link">
+            <div class="card-thumb">
+                ${imgHtml}
+                <span class="card-cat">${art.category}</span>
+            </div>
+            <p class="card-hl">${art.title}</p>
+            <span class="card-time" data-datetime="${art.date}"></span>
+        </a>
+    `;
+}
+
+// Optimization: Debounce helper
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
 function populateRelatedStories() {
     const container = document.querySelector('.related-section');
     if (!container || typeof ARTICLES === 'undefined') return;
@@ -107,18 +136,7 @@ function populateRelatedStories() {
     `;
     
     selected.forEach(art => {
-        const imgHtml = getResponsiveImg(art.img, art.title, "", art.imgStyle);
-        const fullUrl = art.url.startsWith('http') ? art.url : root + art.url;
-        html += `
-            <a href="${fullUrl}" class="card article-link">
-              <div class="card-thumb">
-                ${imgHtml}
-                <span class="card-cat">${art.category}</span>
-              </div>
-              <p class="card-hl">${art.title}</p>
-              <span class="card-time" data-datetime="${art.date}"></span>
-            </a>
-        `;
+        html += renderArticleCard(art, root);
     });
 
     html += '</div>';
@@ -136,20 +154,38 @@ function populateCategoryPage() {
     
     titleEl.textContent = topic;
     titleEl.classList.add('fade-in');
+
+    let topicArticles = [];
+    let customDesc = `The latest news, analysis, and reports from ${topic}.`;
+
+    if (topic === "Top Stories") {
+        const topIds = (typeof SECTION_CONFIG !== 'undefined' && SECTION_CONFIG.topStories) || [];
+        const curated = ARTICLES.filter(a => topIds.includes(a.id));
+        
+        // Fill up to 15 with latest non-curated articles
+        const latest = ARTICLES.filter(a => !topIds.includes(a.id)).slice(0, 15 - curated.length);
+        topicArticles = [...curated, ...latest].sort((a, b) => new Date(b.date) - new Date(a.date));
+        
+        customDesc = "The most essential stories from Nigeria and the world, curated for you.";
+    } else if (topic === "All News") {
+        topicArticles = ARTICLES;
+        customDesc = "A complete feed of the latest reporting and analysis from Forward!";
+    } else {
+        // Filter by Category OR Tag
+        topicArticles = ARTICLES.filter(a => 
+            a.category.toLowerCase() === topic.toLowerCase() || 
+            (a.tags && a.tags.some(t => t.toLowerCase() === topic.toLowerCase()))
+        );
+    }
+    
     if (descEl) {
-        descEl.textContent = `The latest news, analysis, and reports from ${topic}.`;
+        descEl.textContent = customDesc;
         descEl.classList.add('fade-in');
     }
-    document.title = `${topic} News — Forward!`;
+    document.title = `${topic} — Forward!`;
 
-    // Filter by Category OR Tag
-    const topicArticles = ARTICLES.filter(a => 
-        a.category.toLowerCase() === topic.toLowerCase() || 
-        (a.tags && a.tags.some(t => t.toLowerCase() === topic.toLowerCase()))
-    );
-    
     if (topicArticles.length === 0) {
-        document.getElementById('categoryDescription').textContent = `No articles found in ${topic}.`;
+        if (descEl) descEl.textContent = `No articles found in ${topic}.`;
         return;
     }
 
@@ -191,8 +227,11 @@ function populateCategoryPage() {
 
     // Grid (remaining or fallback)
     const grid = document.getElementById('categoryGrid');
+    const list = document.getElementById('categoryList');
+    const listLabel = document.getElementById('categoryListLabel');
+
     if (grid) {
-        const gridArticles = topicArticles.slice(5);
+        const gridArticles = topicArticles.slice(5, 9);
         let pool = [];
         
         const gridHeader = document.querySelector('#categoryGrid').previousElementSibling;
@@ -211,19 +250,86 @@ function populateCategoryPage() {
                            .slice(0, 4);
         }
 
-        grid.innerHTML = pool.map(art => {
+        grid.innerHTML = pool.map(art => renderArticleCard(art, root)).join('');
+
+        // Populate List with anything past the grid
+        if (list) {
+            const extraArticles = topicArticles.slice(9);
+            if (extraArticles.length > 0) {
+                if (listLabel) listLabel.style.display = 'flex';
+                list.innerHTML = extraArticles.map((art, index) => {
+                    const fullUrl = art.url.startsWith('http') ? art.url : root + art.url;
+                    return `
+                        <a href="${fullUrl}" class="list-article article-link">
+                            <span class="list-num">${index + 10}</span>
+                            <div class="list-content">
+                                <div class="list-cat">${art.category}</div>
+                                <div class="list-hl">${art.title}</div>
+                                <div class="list-meta" data-datetime="${art.date}"></div>
+                            </div>
+                        </a>
+                    `;
+                }).join('');
+            } else {
+                if (listLabel) listLabel.style.display = 'none';
+                list.innerHTML = '';
+            }
+        }
+    }
+}
+
+function populateArchivePage() {
+    const listContainer = document.getElementById('archiveList');
+    const statsContainer = document.getElementById('archiveStats');
+    const searchInput = document.getElementById('archiveSearch');
+    
+    if (!listContainer || typeof ARTICLES === 'undefined') return;
+
+    const root = getRootPath();
+
+    function renderArchive(articlesToRender) {
+        if (articlesToRender.length === 0) {
+            listContainer.innerHTML = '<div class="loading-state">No archived stories match your criteria.</div>';
+            if (statsContainer) statsContainer.textContent = 'Showing 0 stories';
+            return;
+        }
+
+        listContainer.innerHTML = articlesToRender.map(art => {
             const fullUrl = art.url.startsWith('http') ? art.url : root + art.url;
+            const dateObj = new Date(art.date);
+            const dateStr = dateObj.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: '2-digit' }).toUpperCase();
+            
             return `
-                <a href="${fullUrl}" class="card article-link">
-                    <div class="card-thumb">
-                        ${getResponsiveImg(art.img, art.title, "", art.imgStyle)}
-                        <span class="card-cat">${art.category}</span>
+                <a href="${fullUrl}" class="archive-item article-link">
+                    <div class="archive-date">${dateStr}</div>
+                    <div class="archive-hl">${art.title}</div>
+                    <div class="archive-meta">
+                        <span class="archive-cat-tag">${art.category}</span> · ${art.author}
                     </div>
-                    <p class="card-hl">${art.title}</p>
-                    <span class="card-time" data-datetime="${art.date}"></span>
                 </a>
             `;
         }).join('');
+
+        if (statsContainer) {
+            statsContainer.textContent = `Showing ${articlesToRender.length} stor${articlesToRender.length === 1 ? 'y' : 'ies'}`;
+        }
+    }
+
+    // Initial render (all articles)
+    renderArchive(ARTICLES);
+
+    // Search logic with Debouncing
+    if (searchInput) {
+        searchInput.addEventListener('input', debounce((e) => {
+            const query = e.target.value.toLowerCase().trim();
+            const filtered = ARTICLES.filter(a => 
+                a.title.toLowerCase().includes(query) || 
+                a.category.toLowerCase().includes(query) ||
+                a.author.toLowerCase().includes(query) ||
+                (a.tags && a.tags.some(t => t.toLowerCase().includes(query)))
+            );
+            renderArchive(filtered);
+        }, 150));
     }
 }
 
@@ -234,7 +340,7 @@ function initSearch() {
 
     const root = getRootPath();
 
-    searchInput.addEventListener('input', (e) => {
+    searchInput.addEventListener('input', debounce((e) => {
         const query = e.target.value.toLowerCase().trim();
         if (query.length < 2) {
             searchResults.classList.remove('active');
@@ -263,7 +369,7 @@ function initSearch() {
             searchResults.innerHTML = '<div class="search-result-item">No results found</div>';
             searchResults.classList.add('active');
         }
-    });
+    }, 150));
 
     // Close results when clicking outside
     document.addEventListener('click', (e) => {
@@ -299,6 +405,7 @@ function initInjectedScripts() {
     initSearch();
     populateRelatedStories();
     populateCategoryPage();
+    populateArchivePage();
 
     if (typeof window.initAQI === 'function') window.initAQI();
 }
@@ -367,19 +474,7 @@ function populateIndex() {
     const topStories = document.getElementById('indexTopStories');
     if (topStories && otherArticles.length > 0) {
         const stories = otherArticles.slice(0, 4);
-        topStories.innerHTML = stories.map(art => {
-            const fullUrl = art.url.startsWith('http') ? art.url : root + art.url;
-            return `
-                <a href="${fullUrl}" class="card article-link">
-                    <div class="card-thumb">
-                        ${getResponsiveImg(art.img, art.title, "", art.imgStyle)}
-                        <span class="card-cat">${art.category}</span>
-                    </div>
-                    <p class="card-hl">${art.title}</p>
-                    <span class="card-time" data-datetime="${art.date}"></span>
-                </a>
-            `;
-        }).join('');
+        topStories.innerHTML = stories.map(art => renderArticleCard(art, root)).join('');
     }
 
     // 3. Latest List (Following 5)
@@ -404,8 +499,11 @@ function populateIndex() {
 
 document.addEventListener('DOMContentLoaded', async () => {
     loadHead();
-    await loadComponent('header-placeholder', 'components/header.html');
-    await loadComponent('footer-placeholder', 'components/footer.html');
+    // Optimization: Parallel loading
+    await Promise.all([
+        loadComponent('header-placeholder', 'components/header.html'),
+        loadComponent('footer-placeholder', 'components/footer.html')
+    ]);
     setActiveNav();
     populateIndex();
     initInjectedScripts();
