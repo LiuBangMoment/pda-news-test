@@ -331,7 +331,7 @@
 
 /* ── BREAKING ───────────────────────────────────── */
 .breaking {
-  background: var(--bg-card);
+  background: var(--bg);
   border-bottom: 1px solid var(--line-strong);
   display: block;
   transition: background 0.15s;
@@ -524,7 +524,7 @@ a.section-label-more:hover {
 }
 
 .card {
-  background: var(--bg-card);
+  background: var(--bg);
   padding: 12px;
   display: flex;
   flex-direction: column;
@@ -1274,11 +1274,6 @@ a.section-label-more:hover {
 
   .prefooter-box,
   .prefooter-box:nth-child(3) {
-    grid-column: span 1;
-    border-right: none;
-  }
-}
--child(3) {
     grid-column: span 1;
     border-right: none;
   }

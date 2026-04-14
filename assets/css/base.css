@@ -7,8 +7,8 @@
   --red: #cc1f1f;
   --accent: #4a9eff;
   --bg: #0e1117;
-  --bg-alt: #13181f; /* Added for hover states */
-  --bg-card: #151921; 
+  --bg-card: #11141a; /* Darker default for cards/sections */
+  --bg-alt: #1a1f26;  /* Lighter for hover states */
   --ink: #dde4ed;
   --mid: #9baec2;    
   --muted: #7890a8;  
